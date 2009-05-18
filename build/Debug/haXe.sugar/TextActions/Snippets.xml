@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-recipes>
+        
+		<snippet id="com.haxe.snippets.haxeclass" category="actions.text.haxe.tools.Snippets">
+            <title>haxe Class</title>
+            <text><![CDATA[package $1 {
+	public class $2 {
+		
+		public function $3() {
+			$0
+		}
+		
+	}
+}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>aclass</text-trigger>
+        </snippet>
+		
+		
+		<snippet id="com.davber.snippets.function" category="actions.text.haxe.tools.Snippets">
+            <title>function</title>
+            <text><![CDATA[function $1($2)${3:\:void} $4{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>fun</text-trigger>
+        </snippet>
+		
+		<snippet id="com.davber.snippets.class" category="actions.text.haxe.tools.Snippets">
+            <title>class</title>
+            <text><![CDATA[${1:public} class $2 {$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>class</text-trigger>
+        </snippet>
+		
+		<!-- control blocks -->
+        <snippet id="com.davber.snippets.for" category="actions.text.haxe">
+            <title>for</title>
+            <text><![CDATA[for (var $1:uint = 0; $1 < ${2:N}; $1++) $3{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>for</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.if" category="actions.text.haxe">
+            <title>if</title>
+            <text><![CDATA[if ($1) $2{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>if</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.if-else" category="actions.text.haxe">
+            <title>else if</title>
+            <text><![CDATA[if ($1) $2{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>elif</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.else" category="actions.text.haxe">
+            <title>else</title>
+            <text><![CDATA[else $2{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>else</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.while" category="actions.text.haxe">
+            <title>while</title>
+            <text><![CDATA[while ($1) $2{$0}]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>while</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.do-while" category="actions.text.haxe">
+            <title>do while</title>
+            <text><![CDATA[do $1{$0} while ($2);]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>dowhile</text-trigger>
+        </snippet>
+		<snippet id="com.asmike.snippets.switch" category="actions.text.haxe">
+            <title>switch</title>
+            <text><![CDATA[switch ($1) $2{$0}]]></text>
+            <syntax-context>davber, davber *</syntax-context>
+            <text-trigger>switch</text-trigger>
+        </snippet>
+		<snippet id="com.davber.snippets.case" category="actions.text.haxe">
+            <title>case</title>
+            <text><![CDATA[case $1: $0 $2break;]]></text>
+            <syntax-context>haxe, haxe *</syntax-context>
+            <text-trigger>case</text-trigger>
+        </snippet>
+</action-recipes> 

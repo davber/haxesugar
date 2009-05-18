@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<action-categories>
+	<!-- Generic categories -->
+	<category id="actions.text.haxe" show="sub">
+		<title>haxe</title>
+	</category>
+
+	<category id="actions.text.hxml" show="sub">
+		<title>HXML</title>
+	</category>
+	
+	<category id="haxe.tools.Utilities" show="inline separated"></category>
+    <category id="haxe.tools.Snippets" show="inline separated"></category>
+    <category id="haxe.tools.Snippets.control" show="inline separated"></category>
+    <category id="haxe.tools.Snippets.container" show="inline separated"></category>
+    <category id="haxe.tools.Snippets.misc" show="inline separated"></category>
+    <category id="haxe.tools.Snippets.documentation" show="inline separated"></category>
+</action-categories>

@@ -1,0 +1,70 @@
+/*
+	@theme haXe Placeholder
+	@placeholder haxe
+*/
+
+@base {
+	color: #333;
+	background-color: #7ff;
+}
+
+haxe name {
+	color: #4f9fcf;
+	newcolor: #6fbfff;
+}
+
+haxe keyword {
+	color: #6700b9;
+}
+
+haxe keyword.class {
+	color: #4F9FCF;
+}
+
+haxe keyword.modifier.scope {
+	
+}
+
+haxe keyword.preprocess {
+	font-style: italic;
+}
+
+
+haxe variable, string.double variable {
+	color: #4F9FCF;
+	newcolor: #6FBFFF;
+}
+
+haxe variable > group {
+	color: #3482da;
+	background-color: #f2fbfe;
+}
+
+haxe definition {
+	color: #d44950;
+}
+
+
+haxe modifier {
+	color: #d48080;
+}
+
+haxe include {
+	color: #555;
+	background-color: #f8f8f8;
+	font-style: italic;
+}
+
+haxe identifier.function {
+	color: #699d36;
+	font-weight: bold;
+}
+
+haxe integer {
+    color: #6700b9;
+	background-color: #fbf2fe;
+}
+
+haxe haxeDoc.keyword {
+	color: #ad91ba;
+}
