@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<action-categories>
+	<!-- Generic categories -->
+	<category id="actions.file.haxe" show="sub">
+		<title>Build</title>
+	</category>
+</action-categories>

@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codesense version="1.0">
+
+    <!-- A completion behavior can customize the behavior of a completion when 
+         it's selected in the completion list. If a behavior is defined in the 
+         root <codesense> element, it will be applied to all completion sets 
+         inside (unless more specific behaviors are defined in the sets). -->
+    
+	<behavior>
+		<confirm characters=";" />
+    </behavior>
+	
+	
+	<!-- Packages -->
+	
+	<set name="com.haxe.package.accessibility">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\s*:)|[^:]</matched-suffix>
+				<transform-into></transform-into>
+			</append-dynamic>
+		</behavior>
+		
+		<completion string="Accessibility" />
+		<completion string="AccessibilityProperties" />
+	</set>
+
+	<set name="davber.haxe.class.classes">
+		<behavior>
+			<append-dynamic>
+				<matched-suffix>(\s*:)|[^:]</matched-suffix>
+				<transform-into>(${1:HELLO}):</transform-into>
+			</append-dynamic>
+		</behavior>
+		
+    <!-- Top level -->
+		
+<completion sting="Array" />
+<completion sting="ArrayAccess" />
+<completion sting="Bool" />
+<completion sting="Class" />
+<completion sting="Date" />
+<completion sting="DateTools" />
+<completion sting="Dynamic" />
+<completion sting="EReg" />
+<completion sting="Enum" />
+<completion sting="Float" />
+<completion sting="Hash" />
+<completion sting="Int" />
+<completion sting="IntHash" />
+<completion sting="IntIter" />
+<completion sting="Iterable" />
+<completion sting="Iterator" />
+<completion sting="Lambda" />
+<completion sting="List" />
+<completion sting="Math" />
+<completion sting="Null" />
+<completion sting="Reflect" />
+<completion sting="Std" />
+<completion sting="String" />
+<completion sting="StringBuf" />
+<completion sting="StringTools" />
+<completion sting="Type" />
+<completion sting="UInt" />
+<completion sting="ValueType" />
+<completion sting="Void" />
+<completion sting="Xml" />
+<completion sting="XmlType" />
+
+		<!-- flash.* -->
+<completion sting="Accessibility" />
+<completion sting="Boot" />
+<completion sting="Button" />
+<completion sting="Camera" />
+<completion sting="Color" />
+<completion sting="ContextMenu" />
+<completion sting="ContextMenuItem" />
+<completion sting="ExtendedKey" />
+<completion sting="Key" />
+<completion sting="Lib" />
+<completion sting="LoadVars" />
+<completion sting="LocalConnection" />
+<completion sting="Microphone" />
+<completion sting="Mouse" />
+<completion sting="MovieClip" />
+<completion sting="MovieClipLoader" />
+<completion sting="NetConnection" />
+<completion sting="NetStream" />
+<completion sting="PrintJob" />
+<completion sting="Selection" />
+<completion sting="SelectionListener" />
+<completion sting="SharedObject" />
+<completion sting="Sound" />
+<completion sting="Stage" />
+<completion sting="System" />
+<completion sting="TextField" />
+<completion sting="TextFormat" />
+<completion sting="TextSnapshot" />
+<completion sting="Video" />
+<completion sting="XMLRequest" />
+<completion sting="XMLSocket" />
+
+<!-- flash.display.* -->
+
+<completion sting="BitmapData" />
+
+<!-- flash.external.* -->
+
+<completion sting="ExternalInterface" />
+
+<!-- flash.filters.* -->
+
+<completion sting="BevelFilter" />
+<completion sting="BitmapFilter" />
+<completion sting="BlurFilter" />
+<completion sting="ColorMatrixFilter" />
+<completion sting="ConvolutionFilter" />
+<completion sting="DisplacementMapFilter" />
+<completion sting="DropShadowFilter" />
+<completion sting="GlowFilter" />
+<completion sting="GradientBevelFilter" />
+<completion sting="GradientGlowFilter" />
+
+<!-- flash.geom.* -->
+
+<completion sting="ColorTransform" />
+<completion sting="Matrix" />
+<completion sting="Point" />
+<completion sting="Rectangle" />
+<completion sting="Transform" />		
+
+<!-- flash.net.* -->
+
+<completion sting="FileReference" />
+<completion sting="FileReferenceList" />
+
+<!-- flash.system.* -->
+
+<completion sting="Capabilities" />
+<completion sting="IME" />
+<completion sting="Security" />
+
+<!-- flash.text.* -->
+
+<completion sting="StyleSheet" />
+<completion sting="TextRenderer" />
+
+<!-- flash9.* -->
+
+<completion sting="Boot" />
+<completion sting="Error" />
+<completion sting="Lib" />
+<completion sting="Memory" />
+<completion sting="Vector" />
+
+<!-- flash9.accessibility.* -->
+
+<completion sting="Accessibility" />
+<completion sting="AccessibilityImplementation" />
+<completion sting="AccessibilityProperties" />
+
+<!-- flash9.display.* -->
+
+<completion sting="AVM1Movie" />
+<completion sting="ActionScriptVersion" />
+<completion sting="Bitmap" />
+<completion sting="BitmapData" />
+<completion sting="BitmapDataChannel" />
+<completion sting="BlendMode" />
+<completion sting="CapsStyle" />
+<completion sting="DisplayObject" />
+<completion sting="DisplayObjectContainer" />
+<completion sting="FrameLabel" />
+<completion sting="GradientType" />
+<completion sting="Graphics" />
+<completion sting="GraphicsBitmapFill" />
+<completion sting="GraphicsEndFill" />
+<completion sting="GraphicsGradientFill" />
+<completion sting="GraphicsPath" />
+<completion sting="GraphicsPathCommand" />
+<completion sting="GraphicsPathWinding" />
+<completion sting="GraphicsShaderFill" />
+<completion sting="GraphicsSolidFill" />
+<completion sting="GraphicsStroke" />
+<completion sting="GraphicsTrianglePath" />
+<completion sting="IBitmapDrawable" />
+<completion sting="IGraphicsData" />
+<completion sting="IGraphicsFill" />
+<completion sting="IGraphicsPath" />
+<completion sting="IGraphicsStroke" />
+<completion sting="InteractiveObject" />
+<completion sting="InterpolationMethod" />
+<completion sting="JointStyle" />
+<completion sting="LineScaleMode" />
+<completion sting="Loader" />
+<completion sting="LoaderInfo" />
+<completion sting="MorphShape" />
+<completion sting="MovieClip" />
+<completion sting="PixelSnapping" />
+<completion sting="SWFVersion" />
+<completion sting="Scene" />
+<completion sting="Shader" />
+<completion sting="ShaderData" />
+<completion sting="ShaderInput" />
+<completion sting="ShaderJob" />
+<completion sting="ShaderParameter" />
+<completion sting="ShaderParameterType" />
+<completion sting="ShaderPrecision" />
+<completion sting="Shape" />
+<completion sting="SimpleButton" />
+<completion sting="SpreadMethod" />
+<completion sting="Sprite" />
+<completion sting="Stage" />
+<completion sting="StageAlign" />
+<completion sting="StageDisplayState" />
+<completion sting="StageQuality" />
+<completion sting="StageScaleMode" />
+<completion sting="TriangleCulling" />
+
+<!-- flash9.errors.* -->
+
+<completion sting="EOFError" />
+<completion sting="IOError" />
+<completion sting="IllegalOperationError" />
+<completion sting="InvalidSWFError" />
+<completion sting="MemoryError" />
+<completion sting="ScriptTimeoutError" />
+<completion sting="StackOverflowError" />
+
+<!-- flash9.events.* -->
+
+<completion sting="ActivityEvent" />
+<completion sting="AsyncErrorEvent" />
+<completion sting="ContextMenuEvent" />
+<completion sting="DataEvent" />
+<completion sting="ErrorEvent" />
+<completion sting="Event" />
+<completion sting="EventDispatcher" />
+<completion sting="EventPhase" />
+<completion sting="FocusEvent" />
+<completion sting="FullScreenEvent" />
+<completion sting="HTTPStatusEvent" />
+<completion sting="IEventDispatcher" />
+<completion sting="IMEEvent" />
+<completion sting="IOErrorEvent" />
+<completion sting="KeyboardEvent" />
+<completion sting="MouseEvent" />
+<completion sting="NetFilterEvent" />
+<completion sting="NetStatusEvent" />
+<completion sting="ProgressEvent" />
+<completion sting="SampleDataEvent" />
+<completion sting="SecurityErrorEvent" />
+<completion sting="ShaderEvent" />
+<completion sting="StatusEvent" />
+<completion sting="SyncEvent" />
+<completion sting="TextEvent" />
+<completion sting="TimerEvent" />
+<completion sting="WeakFunctionClosure" />
+<completion sting="WeakMethodClosure" />
+
+<!-- flash9.external.* -->
+
+<completion sting="ExternalInterface" />
+
+<!-- flash9.filters.* -->
+
+<completion sting="BevelFilter" />
+<completion sting="BitmapFilter" />
+<completion sting="BitmapFilterQuality" />
+<completion sting="BitmapFilterType" />
+<completion sting="BlurFilter" />
+<completion sting="ColorMatrixFilter" />
+<completion sting="ConvolutionFilter" />
+<completion sting="DisplacementMapFilter" />
+<completion sting="DisplacementMapFilterMode" />
+<completion sting="DropShadowFilter" />
+<completion sting="GlowFilter" />
+<completion sting="GradientBevelFilter" />
+<completion sting="GradientGlowFilter" />
+<completion sting="ShaderFilter" />
+
+<!-- flash9.geom.* -->
+
+<completion sting="ColorTransform" />
+<completion sting="Matrix" />
+<completion sting="Matrix3D" />
+<completion sting="Orientation3D" />
+<completion sting="PerspectiveProjection" />
+<completion sting="Point" />
+<completion sting="Rectangle" />
+<completion sting="Transform" />
+<completion sting="Utils3D" />
+<completion sting="Vector3D" />
+
+<!-- flash9.media.* -->
+
+<completion sting="Camera" />
+<completion sting="ID3Info" />
+<completion sting="Microphone" />
+<completion sting="Sound" />
+<completion sting="SoundChannel" />
+<completion sting="SoundCodec" />
+<completion sting="SoundLoaderContext" />
+<completion sting="SoundMixer" />
+<completion sting="SoundTransform" />
+<completion sting="Video" />
+
+<!-- flash9.net.* -->
+
+<completion sting="DynamicPropertyOutput" />
+<completion sting="FileFilter" />
+<completion sting="FileReference" />
+<completion sting="FileReferenceList" />
+<completion sting="IDynamicPropertyOutput" />
+<completion sting="IDynamicPropertyWriter" />
+<completion sting="LocalConnection" />
+<completion sting="NetConnection" />
+<completion sting="NetStream" />
+<completion sting="NetStreamInfo" />
+<completion sting="NetStreamPlayOptions" />
+<completion sting="NetStreamPlayTransitions" />
+<completion sting="ObjectEncoding" />
+<completion sting="Responder" />
+<completion sting="SharedObject" />
+<completion sting="SharedObjectFlushStatus" />
+<completion sting="Socket" />
+<completion sting="URLLoader" />
+<completion sting="URLLoaderDataFormat" />
+<completion sting="URLRequest" />
+<completion sting="URLRequestHeader" />
+<completion sting="URLRequestMethod" />
+<completion sting="URLStream" />
+<completion sting="URLVariables" />
+<completion sting="XMLSocket" />
+
+<!-- flash9.printing.* -->
+
+<completion sting="PrintJob" />
+<completion sting="PrintJobOptions" />
+<completion sting="PrintJobOrientation" />
+
+<!-- flash9.sampler.* -->
+
+<completion sting="Api" />
+<completion sting="DeleteObjectSample" />
+<completion sting="NewObjectSample" />
+<completion sting="Sample" />
+<completion sting="StackFrame" />
+
+<!-- flash9.system.* -->
+
+<completion sting="ApplicationDomain" />
+<completion sting="Capabilities" />
+<completion sting="FSCommand" />
+<completion sting="IME" />
+<completion sting="IMEConversionMode" />
+<completion sting="JPEGLoaderContext" />
+<completion sting="LoaderContext" />
+<completion sting="Security" />
+<completion sting="SecurityDomain" />
+<completion sting="SecurityPanel" />
+<completion sting="System" />
+
+<!-- flash9.text.* -->
+
+<completion sting="AntiAliasType" />
+<completion sting="CSMSettings" />
+<completion sting="Font" />
+<completion sting="FontStyle" />
+<completion sting="FontType" />
+<completion sting="GridFitType" />
+<completion sting="StaticText" />
+<completion sting="StyleSheet" />
+<completion sting="TextColorType" />
+<completion sting="TextDisplayMode" />
+<completion sting="TextExtent" />
+<completion sting="TextField" />
+<completion sting="TextFieldAutoSize" />
+<completion sting="TextFieldType" />
+<completion sting="TextFormat" />
+<completion sting="TextFormatAlign" />
+<completion sting="TextFormatDisplay" />
+<completion sting="TextLineMetrics" />
+<completion sting="TextRenderer" />
+<completion sting="TextRun" />
+<completion sting="TextSnapshot" />
+
+<!-- flash9.text.engine.* -->
+
+<completion sting="BreakOpportunity" />
+<completion sting="CFFHinting" />
+<completion sting="ContentElement" />
+<completion sting="DigitCase" />
+<completion sting="DigitWidth" />
+<completion sting="EastAsianJustifier" />
+<completion sting="ElementFormat" />
+<completion sting="FontDescription" />
+<completion sting="FontLookup" />
+<completion sting="FontMetrics" />
+<completion sting="FontPosture" />
+<completion sting="FontWeight" />
+<completion sting="GraphicElement" />
+<completion sting="GroupElement" />
+<completion sting="JustificationStyle" />
+<completion sting="Kerning" />
+<completion sting="LigatureLevel" />
+<completion sting="LineJustification" />
+<completion sting="RenderingMode" />
+<completion sting="SpaceJustifier" />
+<completion sting="TabAlignment" />
+<completion sting="TabStop" />
+<completion sting="TextBaseline" />
+<completion sting="TextBlock" />
+<completion sting="TextElement" />
+<completion sting="TextJustifier" />
+<completion sting="TextLine" />
+<completion sting="TextLineCreationResult" />
+<completion sting="TextLineMirrorRegion" />
+<completion sting="TextLineValidity" />
+<completion sting="TextRotation" />
+<completion sting="TypographicCase" />
+
+<!-- flash9.trace.* -->
+
+<completion sting="Trace" />
+
+<!-- flash9.ui.* -->
+
+<completion sting="ContextMenu" />
+<completion sting="ContextMenuBuiltInItems" />
+<completion sting="ContextMenuClipboardItems" />
+<completion sting="ContextMenuItem" />
+<completion sting="KeyLocation" />
+<completion sting="Keyboard" />
+<completion sting="Mouse" />
+<completion sting="MouseCursor" />
+
+<!-- flash9.utils.* -->
+
+<completion sting="ByteArray" />
+<completion sting="Dictionary" />
+<completion sting="Endian" />
+<completion sting="IDataInput" />
+<completion sting="IDataOutput" />
+<completion sting="IExternalizable" />
+<completion sting="Namespace" />
+<completion sting="ObjectInput" />
+<completion sting="ObjectOutput" />
+<completion sting="Proxy" />
+<completion sting="QName" />
+<completion sting="SetIntervalTimer" />
+<completion sting="Timer" />
+<completion sting="TypedDictionary" />
+
+<!-- flash9.xml.* -->
+
+<completion sting="XML" />
+<completion sting="XMLDocument" />
+<completion sting="XMLList" />
+<completion sting="XMLNode" />
+<completion sting="XMLNodeType" />
+<completion sting="XMLParser" />
+<completion sting="XMLTag" />
+
+<!-- haxe.* -->
+
+<completion sting="BaseCode" />
+<completion sting="FastCell" />
+<completion sting="FastList" />
+<completion sting="Firebug" />
+<completion sting="Http" />
+<completion sting="Int32" />
+<completion sting="Log" />
+<completion sting="Md5" />
+<completion sting="PosInfos" />
+<completion sting="Public" />
+<completion sting="Resource" />
+<completion sting="Serializer" />
+<completion sting="Stack" />
+<completion sting="StackItem" />
+<completion sting="Template" />
+<completion sting="Timer" />
+<completion sting="TimerQueue" />
+<completion sting="TypeResolver" />
+<completion sting="Unserializer" />
+
+<!-- haxe.io.* -->
+
+<completion sting="Bytes" />
+<completion sting="BytesBuffer" />
+<completion sting="BytesData" />
+<completion sting="BytesInput" />
+<completion sting="BytesOutput" />
+<completion sting="Eof" />
+<completion sting="Error" />
+<completion sting="Input" />
+<completion sting="Output" />
+<completion sting="StringInput" />
+
+<!-- haxe.remoting.* -->
+
+<completion sting="AMFConnection" />
+<completion sting="AsyncAdapter" />
+<completion sting="AsyncConnection" />
+<completion sting="AsyncDebugConnection" />
+<completion sting="AsyncProxy" />
+<completion sting="Connection" />
+<completion sting="Context" />
+<completion sting="ContextAll" />
+<completion sting="DelayedConnection" />
+<completion sting="ExternalConnection" />
+<completion sting="FlashJsConnection" />
+<completion sting="HttpAsyncConnection" />
+<completion sting="HttpConnection" />
+<completion sting="LocalConnection" />
+<completion sting="Proxy" />
+<completion sting="Socket" />
+<completion sting="SocketConnection" />
+<completion sting="SocketProtocol" />
+<completion sting="SocketWrapper" />
+<completion sting="SyncSocketConnection" />
+
+<!-- haxe.rtti.* -->
+
+<completion sting="CType" />
+<completion sting="ClassField" />
+<completion sting="Classdef" />
+<completion sting="EnumField" />
+<completion sting="Enumdef" />
+<completion sting="Generic" />
+<completion sting="HtmlEditor" />
+<completion sting="Infos" />
+<completion sting="Path" />
+<completion sting="PathParams" />
+<completion sting="Platforms" />
+<completion sting="Rights" />
+<completion sting="TypeApi" />
+<completion sting="TypeInfos" />
+<completion sting="TypeParams" />
+<completion sting="TypeRoot" />
+<completion sting="TypeTree" />
+<completion sting="Typedef" />
+<completion sting="XmlParser" />
+
+<!-- haxe.unit.* -->
+
+<completion sting="TestCase" />
+<completion sting="TestResult" />
+<completion sting="TestRunner" />
+<completion sting="TestStatus" />
+
+<!-- haxe.xml.* -->
+
+<completion sting="Attrib" />
+<completion sting="Check" />
+<completion sting="Fast" />
+<completion sting="Filter" />
+<completion sting="Proxy" />
+<completion sting="Rule" />
+
+<!-- js.* -->
+
+<completion sting="Anchor" />
+<completion sting="Body" />
+<completion sting="Boot" />
+<completion sting="Button" />
+<completion sting="Checkbox" />
+<completion sting="Document" />
+<completion sting="Dom" />
+<completion sting="Event" />
+<completion sting="FileUpload" />
+<completion sting="Form" />
+<completion sting="FormElement" />
+<completion sting="Frame" />
+<completion sting="Frameset" />
+<completion sting="Hidden" />
+<completion sting="History" />
+<completion sting="HtmlCollection" />
+<completion sting="HtmlDom" />
+<completion sting="IFrame" />
+<completion sting="Image" />
+<completion sting="Lib" />
+<completion sting="Link" />
+<completion sting="Location" />
+<completion sting="MetaDom" />
+<completion sting="Navigator" />
+<completion sting="Option" />
+<completion sting="Password" />
+<completion sting="Radio" />
+<completion sting="Reset" />
+<completion sting="SWFObject" />
+<completion sting="Screen" />
+<completion sting="Select" />
+<completion sting="Selection" />
+<completion sting="Style" />
+<completion sting="StyleSheet" />
+<completion sting="Submit" />
+<completion sting="Text" />
+<completion sting="Textarea" />
+<completion sting="Window" />
+<completion sting="XMLHttpRequest" />
+<completion sting="XMLSocket" />
+
+<!-- neko.* -->
+
+<completion sting="Boot" />
+<completion sting="FileKind" />
+<completion sting="FileStat" />
+<completion sting="FileSystem" />
+<completion sting="Lib" />
+<completion sting="NativeArray" />
+<completion sting="NativeString" />
+<completion sting="Random" />
+<completion sting="Sys" />
+<completion sting="Utf8" />
+<completion sting="Web" />
+
+<!-- neko.db.* -->
+
+<completion sting="Connection" />
+<completion sting="Manager" />
+<completion sting="Mysql" />
+<completion sting="Object" />
+<completion sting="ResultSet" />
+<completion sting="Sqlite" />
+<completion sting="Transaction" />
+
+<!-- neko.io.* -->
+
+<completion sting="File" />
+<completion sting="FileHandle" />
+<completion sting="FileInput" />
+<completion sting="FileOutput" />
+<completion sting="FileSeek" />
+<completion sting="Path" />
+<completion sting="Process" />
+
+<!-- neko.net.* -->
+
+<completion sting="Host" />
+<completion sting="Poll" />
+<completion sting="ProxyDetect" />
+<completion sting="ProxySettings" />
+<completion sting="ServerLoop" />
+<completion sting="Socket" />
+<completion sting="SocketHandle" />
+<completion sting="SocketInput" />
+<completion sting="SocketOutput" />
+<completion sting="ThreadRemotingServer" />
+<completion sting="ThreadServer" />
+
+<!-- neko.vm.* -->
+
+<completion sting="Deque" />
+<completion sting="Gc" />
+<completion sting="Loader" />
+<completion sting="LoaderHandle" />
+<completion sting="Lock" />
+<completion sting="Module" />
+<completion sting="ModuleHandle" />
+<completion sting="Mutex" />
+<completion sting="Thread" />
+<completion sting="ThreadHandle" />
+<completion sting="Tls" />
+<completion sting="Ui" />
+
+<!-- neko.zip.* -->
+
+<completion sting="CRC32" />
+<completion sting="Compress" />
+<completion sting="Flush" />
+<completion sting="Reader" />
+<completion sting="Uncompress" />
+<completion sting="Writer" />
+<completion sting="ZipEntry" />
+
+<!-- php.* -->
+
+<completion sting="Boot" />
+<completion sting="CacheLimiter" />
+<completion sting="Exception" />
+<completion sting="FileKind" />
+<completion sting="FileStat" />
+<completion sting="FileSystem" />
+<completion sting="HException" />
+<completion sting="Lib" />
+<completion sting="NativeArray" />
+<completion sting="NativeString" />
+<completion sting="Session" />
+<completion sting="Sys" />
+<completion sting="Utf8" />
+<completion sting="Web" />
+
+<!-- php.db.* -->
+
+<completion sting="Connection" />
+<completion sting="Manager" />
+<completion sting="Mysql" />
+<completion sting="Object" />
+<completion sting="ResultSet" />
+<completion sting="Sqlite" />
+
+<!-- php.io.* -->
+
+<completion sting="File" />
+<completion sting="FileHandle" />
+<completion sting="FileInput" />
+<completion sting="FileOutput" />
+<completion sting="FileSeek" />
+<completion sting="Path" />
+<completion sting="Process" />
+
+<!-- php.net.* -->
+
+<completion sting="Host" />
+<completion sting="Socket" />
+<completion sting="SocketDomain" />
+<completion sting="SocketHandle" />
+<completion sting="SocketInput" />
+<completion sting="SocketOutput" />
+
+</set>
+</codesense>

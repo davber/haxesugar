@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		001184C00F7EA6D6003D300C /* PlaceholderThemes in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 001184BD0F7EA6D6003D300C /* PlaceholderThemes */; };
+		00D12DEC0F8F7926009F86F2 /* TextActions in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 3DE0B9E60ED3566600EE948E /* TextActions */; };
+		00F81A370FA3522900EB3FFE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F81A360FA3522900EB3FFE /* WebKit.framework */; };
+		275734CD0F3E9E2F00E59951 /* package.png in Resources */ = {isa = PBXBuildFile; fileRef = 275734CC0F3E9E2F00E59951 /* package.png */; };
+		27703A170F3EB5DF00267E88 /* package_go.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703A160F3EB5DF00267E88 /* package_go.png */; };
+		27703A840F3EC0FE00267E88 /* cog.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703A800F3EC0FE00267E88 /* cog.png */; };
+		27703A850F3EC0FE00267E88 /* cog_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703A810F3EC0FE00267E88 /* cog_add.png */; };
+		27703A860F3EC0FE00267E88 /* cog_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703A820F3EC0FE00267E88 /* cog_delete.png */; };
+		27703A870F3EC0FE00267E88 /* cog_go.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703A830F3EC0FE00267E88 /* cog_go.png */; };
+		27703BF10F3F316F00267E88 /* cup.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703BF00F3F316F00267E88 /* cup.png */; };
+		27703BFA0F3F31E100267E88 /* script_gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 27703BF90F3F31E100267E88 /* script_gear.png */; };
+		277EC8EF0F2B9AC30061FD60 /* CodeSenseLibraries in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */; };
+		277EC8F00F2B9AC30061FD60 /* Syntaxes in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E00F2B9AB20061FD60 /* Syntaxes */; };
+		277EC8F10F2B9AC30061FD60 /* CodeSenseProviders in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */; };
+		277EC8F20F2B9AC30061FD60 /* README.markdown in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E60F2B9AB20061FD60 /* README.markdown */; };
+		277EC8F30F2B9AC30061FD60 /* Languages.xml in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E70F2B9AB20061FD60 /* Languages.xml */; };
+		277EC9890F2C2F1B0061FD60 /* Itemizers in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 3D65762A0E991E38009E9EB8 /* Itemizers */; };
+		27CC12AE0F2FF04B000E2C48 /* FileActions in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC9320F2B9D3F0061FD60 /* FileActions */; };
+		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		B580EF790FBFD960009CAAAC /* haXeDebugWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B580EF780FBFD960009CAAAC /* haXeDebugWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3D0E84440EC3EAA80022EEE4 /* Copy To Espresso */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "~/Library/Application Support/Espresso/Sugars";
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			name = "Copy To Espresso";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D65765F0E991E6E009E9EB8 /* Copy XML Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				00D12DEC0F8F7926009F86F2 /* TextActions in Copy XML Files */,
+				001184C00F7EA6D6003D300C /* PlaceholderThemes in Copy XML Files */,
+				27CC12AE0F2FF04B000E2C48 /* FileActions in Copy XML Files */,
+				277EC9890F2C2F1B0061FD60 /* Itemizers in Copy XML Files */,
+				277EC8EF0F2B9AC30061FD60 /* CodeSenseLibraries in Copy XML Files */,
+				277EC8F00F2B9AC30061FD60 /* Syntaxes in Copy XML Files */,
+				277EC8F10F2B9AC30061FD60 /* CodeSenseProviders in Copy XML Files */,
+				277EC8F20F2B9AC30061FD60 /* README.markdown in Copy XML Files */,
+				277EC8F30F2B9AC30061FD60 /* Languages.xml in Copy XML Files */,
+			);
+			name = "Copy XML Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		001184BD0F7EA6D6003D300C /* PlaceholderThemes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlaceholderThemes; sourceTree = "<group>"; };
+		00F81A360FA3522900EB3FFE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		275734CC0F3E9E2F00E59951 /* package.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = package.png; path = Resources/package.png; sourceTree = "<group>"; };
+		27703A160F3EB5DF00267E88 /* package_go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = package_go.png; path = Resources/package_go.png; sourceTree = "<group>"; };
+		27703A800F3EC0FE00267E88 /* cog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cog.png; path = Resources/cog.png; sourceTree = "<group>"; };
+		27703A810F3EC0FE00267E88 /* cog_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cog_add.png; path = Resources/cog_add.png; sourceTree = "<group>"; };
+		27703A820F3EC0FE00267E88 /* cog_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cog_delete.png; path = Resources/cog_delete.png; sourceTree = "<group>"; };
+		27703A830F3EC0FE00267E88 /* cog_go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cog_go.png; path = Resources/cog_go.png; sourceTree = "<group>"; };
+		27703BF00F3F316F00267E88 /* cup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cup.png; path = Resources/cup.png; sourceTree = "<group>"; };
+		27703BF90F3F31E100267E88 /* script_gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = script_gear.png; path = Resources/script_gear.png; sourceTree = "<group>"; };
+		277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodeSenseLibraries; sourceTree = "<group>"; };
+		277EC8E00F2B9AB20061FD60 /* Syntaxes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Syntaxes; sourceTree = "<group>"; };
+		277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodeSenseProviders; sourceTree = "<group>"; };
+		277EC8E60F2B9AB20061FD60 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		277EC8E70F2B9AB20061FD60 /* Languages.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Languages.xml; sourceTree = "<group>"; };
+		277EC9320F2B9D3F0061FD60 /* FileActions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FileActions; sourceTree = "<group>"; };
+		3D65762A0E991E38009E9EB8 /* Itemizers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Itemizers; sourceTree = "<group>"; };
+		3DE0B9E60ED3566600EE948E /* TextActions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextActions; sourceTree = "<group>"; };
+		8D5B49B6048680CD000E48DA /* haXe.sugar */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = haXe.sugar; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B580EF780FBFD960009CAAAC /* haXeDebugWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = haXeDebugWindow.xib; path = as3sugar/haXeDebugWindow.xib; sourceTree = DEVELOPER_DIR; };
+		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
+				00F81A370FA3522900EB3FFE /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* CSS */ = {
+			isa = PBXGroup;
+			children = (
+				277EC95E0F2BA63C0061FD60 /* Scripts */,
+				3D6576110E991DDC009E9EB8 /* XML Based */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = CSS;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B580EF780FBFD960009CAAAC /* haXeDebugWindow.xib */,
+				27703B580F3F214600267E88 /* Scripts */,
+				275734C90F3E9E1F00E59951 /* icons */,
+				8D5B49B7048680CD000E48DA /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00F81A360FA3522900EB3FFE /* WebKit.framework */,
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+				D2F7E65807B2D6F200F64583 /* CoreData.framework */,
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* haXe.sugar */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		275734C90F3E9E1F00E59951 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				27703BF90F3F31E100267E88 /* script_gear.png */,
+				27703BF00F3F316F00267E88 /* cup.png */,
+				27703A800F3EC0FE00267E88 /* cog.png */,
+				27703A810F3EC0FE00267E88 /* cog_add.png */,
+				27703A820F3EC0FE00267E88 /* cog_delete.png */,
+				27703A830F3EC0FE00267E88 /* cog_go.png */,
+				27703A160F3EB5DF00267E88 /* package_go.png */,
+				275734CC0F3E9E2F00E59951 /* package.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		27703B580F3F214600267E88 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		277EC95E0F2BA63C0061FD60 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		3D6576110E991DDC009E9EB8 /* XML Based */ = {
+			isa = PBXGroup;
+			children = (
+				001184BD0F7EA6D6003D300C /* PlaceholderThemes */,
+				277EC9320F2B9D3F0061FD60 /* FileActions */,
+				277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */,
+				277EC8E00F2B9AB20061FD60 /* Syntaxes */,
+				277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */,
+				277EC8E60F2B9AB20061FD60 /* README.markdown */,
+				277EC8E70F2B9AB20061FD60 /* Languages.xml */,
+				3D65762A0E991E38009E9EB8 /* Itemizers */,
+				3DE0B9E60ED3566600EE948E /* TextActions */,
+			);
+			path = "XML Based";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* haXeSugar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "haXeSugar" */;
+			buildPhases = (
+				8D5B49AF048680CD000E48DA /* Resources */,
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+				3D65765F0E991E6E009E9EB8 /* Copy XML Files */,
+				3D0E84440EC3EAA80022EEE4 /* Copy To Espresso */,
+				277EC95B0F2BA5210061FD60 /* Launch Espresso */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = haXeSugar;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = CSS;
+			productReference = 8D5B49B6048680CD000E48DA /* haXe.sugar */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "haXeSugar" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* CSS */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* haXeSugar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				275734CD0F3E9E2F00E59951 /* package.png in Resources */,
+				27703A170F3EB5DF00267E88 /* package_go.png in Resources */,
+				27703A840F3EC0FE00267E88 /* cog.png in Resources */,
+				27703A850F3EC0FE00267E88 /* cog_add.png in Resources */,
+				27703A860F3EC0FE00267E88 /* cog_delete.png in Resources */,
+				27703A870F3EC0FE00267E88 /* cog_go.png in Resources */,
+				27703BF10F3F316F00267E88 /* cup.png in Resources */,
+				27703BFA0F3F31E100267E88 /* script_gear.png in Resources */,
+				B580EF790FBFD960009CAAAC /* haXeDebugWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		277EC95B0F2BA5210061FD60 /* Launch Espresso */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Launch Espresso";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "script_file=\"run_espresso.sh\"\n\necho \"Running a custom build phase script: $script_file\"\n${PROJECT_DIR}/Scripts/${script_file}\necho \"DONE running a custom build phase script: $script_file\\n\\n\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB913B08733D840010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(ESPRESSO_PATH)/Contents/MacOS/Espresso";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/Debug";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Code/Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				PRODUCT_NAME = haXe;
+				USER_HEADER_SEARCH_PATHS = "$BUILT_PRODUCTS_DIR/Espresso.app/Contents/Headers /Applications/Espresso.app/Contents/Headers";
+				WRAPPER_EXTENSION = sugar;
+			};
+			name = Debug;
+		};
+		1DEB913C08733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = $BUILT_PRODUCTS_DIR/Espresso.app/Contents/MacOS/Espresso;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Code/Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				PRODUCT_NAME = ActionScript3;
+				USER_HEADER_SEARCH_PATHS = $BUILT_PRODUCTS_DIR/Espresso.app/Contents/Headers;
+				WRAPPER_EXTENSION = sugar;
+			};
+			name = Release;
+		};
+		1DEB913F08733D840010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(ESPRESSO_PATH)/Contents/MacOS/Espresso";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)";
+				ESPRESSO_PATH = /Applications/Espresso.app;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(ESPRESSO_PATH)/Contents/Headers";
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB914008733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(ESPRESSO_PATH)/Contents/MacOS/Espresso";
+				ESPRESSO_PATH = /Applications/Espresso.app;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(ESPRESSO_PATH)/Contents/Headers";
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "haXeSugar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB913B08733D840010E9CD /* Debug */,
+				1DEB913C08733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "haXeSugar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB913F08733D840010E9CD /* Debug */,
+				1DEB914008733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

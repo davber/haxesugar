@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<syntax name="com.davber.hxml">
+	<zones>
+		<zone name="hxml.top">
+		</zone>
+	</zones>
+</syntax>

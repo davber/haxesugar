@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<action-recipes>
+	<action id="com.davber.TextActions.haxeSugar.OpenDocumentation" category="actions.text.haxe.tools.Snippets.documentation">
+	
+		<class>haxeOpenDocumentation</class>
+		<title>Open Documentation</title>
+		<setup>
+			<initial-url>http://www.haxe.org/api</initial-url>
+		</setup>
+		<key-equivalent>cmd shift d</key-equivalent>
+	</action>
+	
+	<action id="com.davber.TextActions.haxeSugar.Build" category="actions.text.haxe.tools.Snippets.Utilities">
+	
+		<class>haxeBuild</class>
+		<title>Build</title>
+		<setup>
+			<initial-url>http://www.haxe.org/doc/intro</initial-url>
+		</setup>
+		<key-equivalent>cmd enter</key-equivalent>
+	</action>
+</action-recipes>
