@@ -1,35 +1,55 @@
 <?xml version="1.0"?>
 <syntax name="com.davber.haxe">
 	<zones>		
+		<!-- Top-level stuff -->
+	
 			<!-- Package -->
-			<zone name="container.package.haxe">
-				<expression>\b(package)\s*([a-zA-Z_\.]*)?</expression>
-				<capture number="1" name="keyword.package.haxe" />
-				<capture number="2" name="name.haxe" />
+			<zone name="declaration.package">
+				<expression>\b(package)\s+([a-zA-Z_]\w*(?:\.[a-zA-Z_]\w*)*)</expression>
+				<capture number="1" name="keyword.package" />
+				<capture number="2" name="name.package" />
 			</zone>
 			<!-- Import -->
-			<zone name="container.import.haxe">
-				<expression>\b(import)\s+([a-zA-Z_\.]*)</expression>
-				<capture number="1" name="keyword.definition.import.haxe" />
-				<capture number="2" name="name.haxe" />
+			<zone name="declaration.import">
+				<expression>\b(import)\s+((?:[a-zA-Z_]\w*\.)*)([a-zA-Z_]\w*)</expression>
+				<capture number="1" name="keyword.import" />
+				<capture number="2" name="name.package" />
+				<capture number="3" name="name.type" />
 			</zone>
 		
 			<!-- Class -->
-			<zone name="container.class.haxe">
-					<expression>\b(class)\s+([a-zA-Z_$]\w*)\s*([a-zA-Z\w\s]*)</expression>
-					<capture number="1" name="keyword.definition.class.haxe" />
-					<capture number="2" name="name.haxe" />	
+			<zone name="declaration.class">
+					<expression>\b(class)\s+([a-zA-Z_]\w*)</expression>
+					<capture number="1" name="keyword.type.class" />
+					<capture number="2" name="name.type.class" />	
 			</zone>
-			<include collection="language.haxe" />
-			<include collection="metadata.comment" />
+			
+			<!-- Interface -->
+			<zone name="declaration.interface">
+					<expression>\b(class)\s+([a-zA-Z_]\w*)</expression>
+					<capture number="1" name="keyword.type.interface" />
+					<capture number="2" name="name.type.interface" />	
+			</zone>
+			
+			<!-- Typedef -->
+			<zone name="declaration.typedef">
+				<expression>\b(typedef)\s+([a-zA-Z_]\w*)\s*\=\s*(.+)</expression>
+				<capture number="1" name="keyword.type.typedef" />
+				<capture number="2" name="name.type.typedef" />
+				<capture number="3" name="name.type" />
+			</zone>
+			
+			<!-- TODO : we should only include the core language inside an interface and class declaration -->
+			
+			<include collection="core" />
 	</zones>
 	
 	<library>
-		<collection name="language.haxe">
-			<include collection="container.method.haxe" />
-			<include collection="container.block.haxe" />
-			<include collection="keyword.haxe" />
-			<include collection="delimiter.haxe" />
+		<collection name="core">
+			<include collection="class.attributes" />
+			<include collection="code.block" />
+			<include collection="keyword" />
+			<include collection="delimiter" />
 			<include collection="literal.string" />
 			<include collection="literal.numeric" />
 			<include collection="literal.keyword" />
@@ -37,181 +57,191 @@
 			<include collection="metadata.comment" />
 		</collection>
 		
-		<!-- Function -->
-		<collection name="container.method.haxe">
-			<zone name="container.method.haxe">
+		<!-- Class attributes - variables and methods -->
+		<collection name="class.attributes">
+			<zone name="declaration.method">
 				<starts-with>
-					<expression>\b(function)\s?+([a-zA-Z_$]\w*)?\s*(\()</expression>
-					<capture number="1" name="keyword.definition.function.haxe" />
-					<capture number="2" name="name.haxe" />
-					<capture number="3" name="delimiter.balanced.parenthesis.condition.begin.haxe"/>
+					<expression>\b(function)\s+([a-zA-Z_]\w*)\s*(\()</expression>
+					<capture number="1" name="keyword.function" />
+					<capture number="2" name="name.var.attribute" />
+					<capture number="3" name="delimiter.balanced.parenthesis.condition.begin"/>
 				</starts-with>
 				<ends-with>
-					<expression>\)(:[a-zA-Z\w]*)?</expression>
-					<capture number="1" name="delimiter.balanced.parenthesis.condition.end.haxe"/>
+					<expression>(\))</expression>
+					<capture number="1" name="delimiter.balanced.parenthesis.condition.end"/>
 				</ends-with>
 				<subzones>
-					<include collection="container.block.subzones.haxe" />
+					<include collection="code.block.subzones" />
+				</subzones>
+			</zone>
+			<zone name="declaration.var">
+				<starts-with>
+					<expression>\b(var)\s+([a-zA-Z_]\w*)</expression>
+					<capture number="1" name="keyword.var" />
+					<capture number="2" name="name.var.attribute" />
+				</starts-with>
+				<ends-with>
+					<expression>(\))</expression>
+					<capture number="1" name="delimiter.balanced.parenthesis.condition.end"/>
+				</ends-with>
+				<subzones>
+					<include collection="code.block.subzones" />
 				</subzones>
 			</zone>
 		</collection>
-		
-		<!-- Containers from (grabbed, but modified, from PHP.sugar via AS3.sugar...) -->
-		<collection name="container.block.haxe">
-            <zone name="container.block.if.haxe">
+
+		<collection name="code.block">
+            <zone name="code.block.if">
                 <starts-with>
-                    <expression>(\bif\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.if.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(if)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.if" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.begin.parenthesis" />
                 </ends-with>
                 <subzones>
-                    <include collection="container.block.subzones.haxe" />
+                    <include collection="block.subzones" />
                 </subzones>
             </zone>
-            <zone name="container.block.elseif.haxe">
+            <zone name="code.block.elseif">
                 <starts-with>
-                    <expression>(\belse\s*if\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.elseif.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(else\s*if)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.elseif" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.end.parenthesis" />
                 </ends-with>
                 <subzones>
-                    <include collection="container.block.subzones.haxe" />
+                    <include collection="code.block.subzones" />
                 </subzones>
             </zone>
-            <zone name="container.block.else.haxe">
-                <expression>(\belse\b)</expression>
-                <capture number="1" name="keyword.control.flow.else.haxe" />
-                <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+            <zone name="code.block.else">
+                <expression>\b(else)\b</expression>
+                <capture number="1" name="keyword.control.else" />
+                <capture number="2" name="delimiter.balanced.begin.parenthesis" />
             </zone>
-            <zone name="container.block.for.haxe">
+            <zone name="code.block.for">
                 <starts-with>
-                    <expression>(\bfor\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.for.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(for)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.for" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.end.parenthesis" />
                 </ends-with>
                 <subzones>
-										<zone name="operator.in.haxe">
+										<zone name="keyword.control.in">
                         <expression>in</expression>
                     </zone>
-                    <include collection="container.block.subzones.haxe" />
+                    <include collection="code.block.subzones" />
                 </subzones>
             </zone>
-            <zone name="container.block.while.haxe">
+            <zone name="code.block.while">
                 <starts-with>
-                    <expression>(\bwhile\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.while.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(while)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.while" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.end.parenthesis." />
                 </ends-with>
                 <subzones>
                     <include collection="container.block.subzones.haxe" />
                 </subzones>
             </zone>
-            <zone name="container.block.dowhile.haxe">
-                
+            <zone name="code.block.dowhile">
                     <expression>\b(do)</expression>
-                    <capture number="1" name="keyword.control.flow.dowhile.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
-
+                    <capture number="1" name="keyword.control.dowhile" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
             </zone>
-            <zone name="container.block.switch.haxe">
+            <zone name="code.block.switch">
                 <starts-with>
-                    <expression>(\bswitch\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.switch.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(switch)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.switch" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.end.parenthesis" />
                 </ends-with>
                 <subzones>
-                    <include collection="container.block.subzones.haxe" />
+                    <include collection="code.block.subzones" />
                 </subzones>
             </zone>
-            <zone name="container.block.try.haxe">
-                <expression>(\btry\b)</expression>
-                <capture number="1" name="keyword.control.flow.try.haxe" />
+            <zone name="code.block.try">
+                <expression>\b(try)\b</expression>
+                <capture number="1" name="keyword.control.try" />
             </zone>
-            <zone name="container.block.catch.haxe">
+            <zone name="code.block.catch">
                 <starts-with>
-                    <expression>(\bcatch\b)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.catch.haxe" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.condition.begin.haxe" />
+                    <expression>\b(catch)\b\s*(\()</expression>
+                    <capture number="1" name="keyword.control.catch" />
+                    <capture number="2" name="delimiter.balanced.begin.parenthesis" />
                 </starts-with>
                 <ends-with>
                     <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.condition.end.haxe" />
+                    <capture number="0" name="delimiter.balanced.end.parenthesis" />
                 </ends-with>
                 <subzones>
-                    <include collection="container.block.subzones.haxe" />
+                    <include collection="code.block.subzones" />
                 </subzones>
             </zone>
         </collection>
 		
-		<collection name="container.block.subzones.haxe">
-			<include collection="metadata.comment.haxe" />
-	        <include collection="literal.collection.haxe" />
-	        <include collection="container.block.haxe" />
-	        <include collection="literal.keyword.haxe" />
-	        <include collection="identifier.function.haxe" />
-	        <include collection="delimiter.haxe" />
-	        <include collection="operator.haxe" />
-	        <include collection="identifier.variable.haxe" />
-	        <include collection="identifier.class.haxe" />
-	        <include collection="literal.string.haxe" />
-	        <include collection="literal.numeric.haxe" />
-	        <include collection="keyword.haxe" />
+		<collection name="code.block.subzones">
+				<include collection="metadata.comment" />
+	        <include collection="literal.collection" />
+	        <include collection="container.block" />
+	        <include collection="literal.keyword" />
+	        <include collection="identifier.function" />
+	        <include collection="delimiter" />
+	        <include collection="operator" />
+	        <include collection="identifier.variable" />
+	        <include collection="identifier.class" />
+	        <include collection="literal.string" />
+	        <include collection="literal.numeric" />
+	        <include collection="keyword" />
 		</collection>
-		<!-- End from PHP Sugar -->
 		
 		<!-- Delimiters (grabbed from elliottcable's Ruby.sugar via the AS3 sugar...) -->
         
-        <collection name="delimiter.haxe">
-            <zone name="delimiter.terminator.haxe">
-                <expression>\;</expression>
+        <collection name="delimiter">
+            <zone name="delimiter.terminator">
+                <expression>;</expression>
             </zone>
-            <zone name="delimiter.separator.comma.haxe">
+            <zone name="delimiter.separator.comma">
                 <expression>,</expression>
             </zone>
-            <zone name="delimiter.separator.pairing.haxe">
-                <expression>=></expression>
+            <zone name="delimiter.separator.pairing">
+                <expression>:</expression>
             </zone>
-            <zone name="delimiter.balanced.curly-brace.begin.haxe">
-                <expression>\{</expression>
+            <zone name="delimiter.balanced.begin.curly-brace">
+                <expression>{</expression>
             </zone>
-            <zone name="delimiter.balanced.curly-brace.end.haxe">
-                <expression>\}</expression>
+            <zone name="delimiter.balanced.end.curly-brace">
+                <expression>}</expression>
             </zone>
-            <zone name="delimiter.balanced.parenthesis.begin.haxe">
+            <zone name="delimiter.balanced.begin.parenthesis">
                 <expression>\(</expression>
             </zone>
-            <zone name="delimiter.balanced.parenthesis.end.haxe">
+            <zone name="delimiter.balanced.end.parenthesis">
                 <expression>\)</expression>
             </zone>
-            <zone name="delimiter.balanced.square-brace.begin.haxe">
+            <zone name="delimiter.balanced.begin.square-brace">
                 <expression>\[</expression>
             </zone>
-            <zone name="delimiter.balanced.square-brace.end.haxe">
+            <zone name="delimiter.balanced.end.square-brace">
                 <expression>\]</expression>
             </zone>
         </collection>
 		
-		<collection name="comment.haxe">
+		<collection name="comment">
 			<zone name="comment.block.documentation">
 				<starts-with>
 					<expression>/\*\*</expression>
@@ -238,37 +268,56 @@
 			</zone>
 		</collection>
 		
-		<!-- Keywords -->
-		<collection name="keyword.haxe">
-			<zone name="keyword.definition.haxe">
-				<expression>\b(package|class|function|import|interface|extends|implements|var)</expression>
+		<!-- Keywords and standard classes... -->
+		
+		<collection name="keyword">
+			<zone name="keyword.definition">
+				<expression>\b(package|class|function|import|interface|extends|implements|var|typedef)</expression>
 			</zone>
-			<zone name="keyword.definition.class.top-level.haxe">
-				<expression>\b(Array(Access)?|Bool|Class|Date(Tools)?|Dynamic|EReg|Enum|Float|Hash|Int(Hash|Iter)?|Itera(ble|tor)|Lambda|List|Math|Null|Reflect|Std|Sting(Buf|Tools)?|Type|UInt|ValueType|Void|Xml(Type)?)\b</expression>
+			<zone name="name.sys.package.flash">
+				<expression>\b(flash(?:\.(?:accessibility|display|errors|events|external|filters|geom|media|net|printing|sampler|system|text|trace|ui|utils|xml))?)\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.flash.haxe">
+			<zone name="name.sys.package.haxe">
+				<expression>\b(haxe(?:\.(?:io|remoting|rtti|unit|xml))?)\b</expression>
+			</zone>
+			<zone name="name.sys.package.js">
+				<expression>\b(js)\b</expression>
+			</zone>
+			<zone name="name.sys.package.neko">
+				<expression>\b(neko(?:\.(?:db|io|net|vm|zip))?)\b</expression>
+			</zone>
+			<zone name="name.sys.package.php">
+				<expression>\b(php(?:\.(?:db|io|net))?)\b</expression>
+			</zone>
+			<zone name="name.sys.package.tools">
+				<expression>\b(tools(?:\.(?:haxedoc|haxelib|hxinst))?)</expression>
+			</zone>
+			<zone name="name.sys.type.top">
+				<expression>\b(Array(Access)?|Bool|Class|Date(Tools)?|Dynamic|EReg|Enum|Float|Hash|Int(Hash|Iter)?|Itera(ble|tor)|Lambda|List|Math|Null|Reflect|Std|String(Buf|Tools)?|Type|UInt|ValueType|Void|Xml(Type)?)\b</expression>
+			</zone>
+			<zone name="name.sys.type.flash">
 				<expression>\b(Accessibility|Boot|Button|Camera|Color|ContextMenu(Item)?|ExtendedKey|Key|Lib|LoadVars|LocalConnection|Microphone|Mouse|MovieClip(Loader)?|Net(Connection|Stream)|PrintJob|Selection(Listener)?|SharedObject|Sound|Stage|System|Text(Field|Format|Snapshot)|Video|XML(Request|Socket))\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.flash9.haxe">
+			<zone name="name.sys.type.flash9">
 				<expression>\b(Boot|Error|Lib|Memory|Vector)\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.haxe.haxe">
+			<zone name="name.sys.type.haxe">
 				<expression>\b(BaseCode|Fast(Cell|List)|Firebug|Http|Int32|Log|Md5|PosInfos|Public|Resource|Serializer|Stack(Item)?|Template|Timer(Queue)?|TypeResolver|Unserializer)\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.js.haxe">
+			<zone name="name.sys.type.js">
 				<expression>\b(Anchor|Body|Boot|Button|Checkbox|Document|Dom|Event|FileUpload|Form(Element)?|Frame(set)?|Hidden|History|Html(Collection|Dom)|IFrame|Image|Lib|Link|Location|MetaDom|Navigator|Option|Password|Radio|Reset|SWFObject|Screen|Select(ion)?|Style(Sheet)?|Submit|Text(area)?|Window|XML(HttpRequest|Socket))\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.neko.haxe">
+			<zone name="name.sys.neko">
 				<expression>\b(Boot|File(Kind|Stat|System)|Lib|Native(Array|String)|Random|Sys|Utf8|Web)\b</expression>
 			</zone>
-			<zone name="keyword.definition.class.php.haxe">
+			<zone name="name.sys.php">
 				<expression>\b(Boot|CacheLimiter|Exception|File(Kind|Stat|System)|HException|Lib|Native(Array|String)|Session|Sys|Utf8|Web)\b</expression>
 			</zone>
-			<zone name="keyword.control.flow.haxe">
-                <expression>\b(break|case|continue|default|do|else(if)?|for|if|switch|while|return)</expression>
+			<zone name="keyword.control">
+                <expression>\b(break|case|continue|default|do|else|else\s*if|for|if|switch|while|return)\b</expression>
             </zone>
-			<zone name="keyword.modifier.scope.haxe">
-				<expression>\b(public|private|protected|static|dynamic|override|inline)</expression>
+			<zone name="keyword.modifier.scope">
+				<expression>\b(public|private|protected|static|dynamic|override|inline)\b</expression>
 			</zone>
 		</collection>
 		
@@ -278,11 +327,11 @@
             <zone name="literal.string.quoted.single">
                 <starts-with>
                     <expression>'</expression>
-                    <capture number="0" name="delimiter.balanced.quote.single.begin"/>
+                    <capture number="0" name="delimiter.balanced.begin.quote"/>
                 </starts-with>
                 <ends-with>
                     <expression>'</expression>
-                    <capture number="0" name="delimiter.balanced.quote.single.end"/>
+                    <capture number="0" name="delimiter.balanced.end.quote"/>
                 </ends-with>
                 <subzones>
                     <zone name="literal.escape.brief">
@@ -296,11 +345,11 @@
             <zone name="literal.string.quoted.double">
                 <starts-with>
                     <expression>"</expression>
-                    <capture number="0" name="delimiter.balanced.quote.double.begin"/>
+                    <capture number="0" name="delimiter.balanced.begin.double-quote"/>
                 </starts-with>
                 <ends-with>
                     <expression>"</expression>
-                    <capture number="0" name="delimiter.balanced.quote.double.begin"/>
+                    <capture number="0" name="delimiter.balanced.end.double-quote"/>
                 </ends-with>
                 <subzones>
                     <include collection="identifier.variable" />
@@ -381,11 +430,11 @@
             	<expression>\bfalse\b</expression>
             </zone>
             <!-- null -->
-            <zone name="literal.keyword.nothing.null">
+            <zone name="literal.keyword.null">
             	<expression>\bnull\b</expression>
             </zone>
-						<!-- trace -->
-            <zone name="literal.keyword.constant.trace">
+						<!-- trace.. TODO : does not belong here -->
+            <zone name="keyword.trace">
             	<expression>\btrace\b</expression>
             </zone>
         </collection>
@@ -418,9 +467,8 @@
 							<expression>$\n?</expression>
 						</ends-with>
 						<subzones>
-							<include collection="metadata.comment.asDoc" />
 							<zone name="content">
-								<expressoin>(.*)?</expressoin>
+								<expression>(.*)?</expression>
 								<capture number="3" name="content" />
 							</zone>
 						</subzones>
