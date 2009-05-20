@@ -21,13 +21,13 @@
 		277EC8EF0F2B9AC30061FD60 /* CodeSenseLibraries in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */; };
 		277EC8F00F2B9AC30061FD60 /* Syntaxes in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E00F2B9AB20061FD60 /* Syntaxes */; };
 		277EC8F10F2B9AC30061FD60 /* CodeSenseProviders in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */; };
-		277EC8F20F2B9AC30061FD60 /* README.markdown in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E60F2B9AB20061FD60 /* README.markdown */; };
 		277EC8F30F2B9AC30061FD60 /* Languages.xml in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC8E70F2B9AB20061FD60 /* Languages.xml */; };
 		277EC9890F2C2F1B0061FD60 /* Itemizers in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 3D65762A0E991E38009E9EB8 /* Itemizers */; };
 		27CC12AE0F2FF04B000E2C48 /* FileActions in Copy XML Files */ = {isa = PBXBuildFile; fileRef = 277EC9320F2B9D3F0061FD60 /* FileActions */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		B580EF790FBFD960009CAAAC /* haXeDebugWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B580EF780FBFD960009CAAAC /* haXeDebugWindow.xib */; };
+		B5D39EB80FC4C67300818874 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = B5D39EB70FC4C67300818874 /* README.markdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,7 +54,6 @@
 				277EC8EF0F2B9AC30061FD60 /* CodeSenseLibraries in Copy XML Files */,
 				277EC8F00F2B9AC30061FD60 /* Syntaxes in Copy XML Files */,
 				277EC8F10F2B9AC30061FD60 /* CodeSenseProviders in Copy XML Files */,
-				277EC8F20F2B9AC30061FD60 /* README.markdown in Copy XML Files */,
 				277EC8F30F2B9AC30061FD60 /* Languages.xml in Copy XML Files */,
 			);
 			name = "Copy XML Files";
@@ -80,7 +79,6 @@
 		277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodeSenseLibraries; sourceTree = "<group>"; };
 		277EC8E00F2B9AB20061FD60 /* Syntaxes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Syntaxes; sourceTree = "<group>"; };
 		277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CodeSenseProviders; sourceTree = "<group>"; };
-		277EC8E60F2B9AB20061FD60 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		277EC8E70F2B9AB20061FD60 /* Languages.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Languages.xml; sourceTree = "<group>"; };
 		277EC9320F2B9D3F0061FD60 /* FileActions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FileActions; sourceTree = "<group>"; };
 		3D65762A0E991E38009E9EB8 /* Itemizers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Itemizers; sourceTree = "<group>"; };
@@ -88,6 +86,7 @@
 		8D5B49B6048680CD000E48DA /* haXe.sugar */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = haXe.sugar; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B580EF780FBFD960009CAAAC /* haXeDebugWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = haXeDebugWindow.xib; path = as3sugar/haXeDebugWindow.xib; sourceTree = DEVELOPER_DIR; };
+		B5D39EB70FC4C67300818874 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +106,7 @@
 		089C166AFE841209C02AAC07 /* CSS */ = {
 			isa = PBXGroup;
 			children = (
+				B5D39EB70FC4C67300818874 /* README.markdown */,
 				277EC95E0F2BA63C0061FD60 /* Scripts */,
 				3D6576110E991DDC009E9EB8 /* XML Based */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -201,7 +201,6 @@
 				277EC8DC0F2B9AB20061FD60 /* CodeSenseLibraries */,
 				277EC8E00F2B9AB20061FD60 /* Syntaxes */,
 				277EC8E30F2B9AB20061FD60 /* CodeSenseProviders */,
-				277EC8E60F2B9AB20061FD60 /* README.markdown */,
 				277EC8E70F2B9AB20061FD60 /* Languages.xml */,
 				3D65762A0E991E38009E9EB8 /* Itemizers */,
 				3DE0B9E60ED3566600EE948E /* TextActions */,
@@ -265,6 +264,7 @@
 				27703BF10F3F316F00267E88 /* cup.png in Resources */,
 				27703BFA0F3F31E100267E88 /* script_gear.png in Resources */,
 				B580EF790FBFD960009CAAAC /* haXeDebugWindow.xib in Resources */,
+				B5D39EB80FC4C67300818874 /* README.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
