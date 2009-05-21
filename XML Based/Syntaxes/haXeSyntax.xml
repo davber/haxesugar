@@ -486,19 +486,26 @@
 		<collection name="metadata.preprocess">	
 			<zone name="metadata.preprocess.if">
 				<starts-with>
-					<expression>^(?:(#(?:else)?if)\s+([^\s]+))|(#else)\b</expression>
+					<expression>(?&lt;=#)(?:((?:else)?if)\s+([^\s]+))|(else)\b</expression>
+					<capture number="0" name="metadata.preprocess.line" />
 					<capture number="1" name="keyword.preprocess.if" />
 					<capture number="2" name="metadata.preprocess.cond" />
 					<capture number="3" name="keyword.preprocess.else" />
 				</starts-with>
 				<ends-with>
-					<expression>^(?:(#else(?:if)?)|(#end))\b</expression>
+					<expression>^\s*#</expression>
 					<capture number="1" name="keyword.preprocess.else" />
 					<capture number="2" name="keyword.preprocess.end" />
 				</ends-with>
 				<subzones>
 					<include syntax="self" />
 				</subzones>
+			</zone>
+			
+			<zone name="metadata.preprocess.end">
+				<expression>(?&lt;=#)(end)\b</expression>
+				<capture number="0" name="metadata.preprocess.line" />
+				<capture number="1" name="keyword.preprocess.end" />
 			</zone>
 			
 	    </collection>
