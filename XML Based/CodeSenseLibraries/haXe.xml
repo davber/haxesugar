@@ -897,7 +897,7 @@
 		<behavior>
 			<append-dynamic>
 				<matched-suffix>(\s*:)|[^:]</matched-suffix>
-				<transform-into></transform-into>
+				<transform-into>${1}</transform-into>
 			</append-dynamic>
 		</behavior>
 		<completion sting="Array" />

@@ -8,63 +8,51 @@
 	background-color: #7ff;
 }
 
-haxe name {
+identifier {
 	color: #4f9fcf;
 	newcolor: #6fbfff;
 }
 
-haxe keyword {
+identifier.sys {
 	color: #6700b9;
 }
 
-haxe keyword.class {
-	color: #4F9FCF;
+keyword {
+	color: #6700b9;
 }
 
-haxe keyword.modifier.scope {
-	
+keyword.class, keyword.interface {
+	font-weight: bold;
 }
 
-haxe keyword.preprocess {
+keyword.modifier {
+	color: #d48080;
+}
+
+keyword.preprocess {
 	font-style: italic;
 }
 
-
-haxe variable, string.double variable {
+identifier.variable, string.double identifier {
 	color: #4F9FCF;
 	newcolor: #6FBFFF;
 }
 
-haxe variable > group {
+variable > group {
 	color: #3482da;
 	background-color: #f2fbfe;
 }
 
-haxe definition {
+keyword.definition {
 	color: #d44950;
 }
 
-
-haxe modifier {
-	color: #d48080;
-}
-
-haxe include {
-	color: #555;
-	background-color: #f8f8f8;
-	font-style: italic;
-}
-
-haxe identifier.function {
+identifier.function {
 	color: #699d36;
 	font-weight: bold;
 }
 
-haxe integer {
+literal.numeric {
     color: #6700b9;
 	background-color: #fbf2fe;
-}
-
-haxe haxeDoc.keyword {
-	color: #ad91ba;
 }
