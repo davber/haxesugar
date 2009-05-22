@@ -23,9 +23,11 @@ It currently contains the following pieces:
 
 * The code for code completion is there, but for some mysterious reason they are never triggered
 * The syntax is almost too involved, which might make it lose its context easily
+* The navigation is currently messed up, showing only comment fragments, instead of classes and functions
 
-## Whats in the works
+## What's in the works
 
+* Getting navigation back
 * Code completion
 * Support for hxDoc comments showing up when typing the name (or beginning of a name) of a method
 * Better support for the haXe closure syntax
