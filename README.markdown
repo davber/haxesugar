@@ -1,5 +1,5 @@
-# haXe Sugar v0.2.1
-> Updated 5/20/2009
+# haXe Sugar v0.3.0
+> Updated 5/22/2009
 
 ## Description
 
@@ -7,7 +7,7 @@ A plugin (or "sugar") for the Espresso IDE, for haXe development. haXe is a mult
 
 It currently contains the following pieces:
 
-* Syntax Highlighting for most keywords and some basic types
+* Syntax Highlighting for all keywords, standard library classes and for most constructs
 * Itemizers with custom icons (FamFamFam)
 * Includes classes from the following targets: flash, flash9, neko and php
 
@@ -21,19 +21,18 @@ It currently contains the following pieces:
 
 ## Bugs / Issues!!
 
-* I have not tried out code completion yet, but do not hold your breath for it to work
-* Only a quite restrictive sub set of the standard classes are highlighted
+* The code for code completion is there, but for some mysterious reason they are never triggered
+* The syntax is almost too involved, which might make it lose its context easily
 
 ## Whats in the works
 
 * Code completion
-* Full support for all standard classes
 * Support for hxDoc comments showing up when typing the name (or beginning of a name) of a method
 * Better support for the haXe closure syntax
 
 ## Other Info
 
-* This sugar was based on the AS3 sugar by Mike Murray. Thanks for showing the way!
+* This sugar was based on the AS3 sugar by Mike Murray, but is totally rewritten to more or less emulate a CFG for haXe, except for some literal and comment syntax which is borrowed from PHP's syntax files
 
 ## License
 

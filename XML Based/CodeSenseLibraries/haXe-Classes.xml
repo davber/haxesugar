@@ -26,12 +26,6 @@
 	</set>
 
 	<set name="davber.haxe.class.classes">
-		<behavior>
-			<append-dynamic>
-				<matched-suffix>(\s*:)|[^:]</matched-suffix>
-				<transform-into>(${1:HELLO}):</transform-into>
-			</append-dynamic>
-		</behavior>
 		
     <!-- Top level -->
 		

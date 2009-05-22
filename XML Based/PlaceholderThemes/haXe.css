@@ -1,6 +1,6 @@
 /*
 	@theme haXe Placeholder
-	@placeholder haxe
+	@placeholder com.davber.haxe
 */
 
 @base {
@@ -8,7 +8,7 @@
 	background-color: #7ff;
 }
 
-identifier {
+identifier.declaration, identifier.definition {
 	color: #4f9fcf;
 	newcolor: #6fbfff;
 }
@@ -29,18 +29,9 @@ keyword.modifier {
 	color: #d48080;
 }
 
-keyword.preprocess {
-	font-style: italic;
-}
-
 identifier.variable, string.double identifier {
 	color: #4F9FCF;
 	newcolor: #6FBFFF;
-}
-
-variable > group {
-	color: #3482da;
-	background-color: #f2fbfe;
 }
 
 keyword.definition {
@@ -53,6 +44,16 @@ identifier.function {
 }
 
 literal.numeric {
-    color: #6700b9;
+	color: #6700b9;
 	background-color: #fbf2fe;
 }
+
+metadata.processing {
+	color: #AAAAAA;
+}
+
+keyword.processing {
+	color: #AAAAAA;
+	font-weight: bold;
+}
+

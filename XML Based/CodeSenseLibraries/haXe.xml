@@ -894,12 +894,6 @@
 	</set>
 
 	<set name="davber.haxe.class.toplevel">
-		<behavior>
-			<append-dynamic>
-				<matched-suffix>(\s*:)|[^:]</matched-suffix>
-				<transform-into>${1}</transform-into>
-			</append-dynamic>
-		</behavior>
 		<completion sting="Array" />
 		<completion sting="ArrayAccess" />
 		<completion sting="Bool" />

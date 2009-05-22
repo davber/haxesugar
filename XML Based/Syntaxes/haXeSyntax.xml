@@ -1,332 +1,568 @@
 <?xml version="1.0"?>
 <syntax name="com.davber.haxe">
-	<zones>		
-		<!-- Top-level stuff -->
-	
-			<!-- Package -->
-			<zone name="container.package">
-				<expression>\b(package)\s+([a-zA-Z_]\w*(?:\.[a-zA-Z_]\w*)*)</expression>
-				<capture number="1" name="keyword.package" />
-				<capture number="2" name="identifier.package.definition" />
-			</zone>
-			<!-- Import -->
-			<zone name="container.import">
-				<expression>\b(import)\s+((?:[a-zA-Z_]\w*\.)*)([a-zA-Z_]\w*)</expression>
-				<capture number="1" name="keyword.import" />
-				<capture number="2" name="identifier.package" />
-				<capture number="3" name="identifier.type" />
-			</zone>
-		
-			<!-- Class -->
-			<zone name="container.class.definition">
-					<expression>\b(class)\s+([a-zA-Z_]\w*)</expression>
-					<capture number="1" name="keyword.definition.class" />
-					<capture number="2" name="identifier.type.class.definition" />	
-			</zone>
-			
-			<!-- Interface -->
-			<zone name="container.class.interface.definition">
-					<expression>\b(interface)\s+([a-zA-Z_]\w*)</expression>
-					<capture number="1" name="keyword.definition.interface" />
-					<capture number="2" name="identifier.type.interface.definition" />	
-			</zone>
-			
-			<!-- Typedef -->
-			<zone name="container.class.typedef.definition">
-				<expression>\b(typedef)\s+([a-zA-Z_]\w*)</expression>
-				<capture number="1" name="keyword.definition.typedef" />
-				<capture number="2" name="identifier.type.typedef.definition" />
-			</zone>
-			
-			<!-- TODO : we should only include the core language inside an interface and class declaration -->
-			
-			<include collection="core" />
+	<zones>
+		<include collection="root.haxe" />
 	</zones>
 	
 	<library>
-		<collection name="core">
-			<include collection="class.attributes" />
-			<include collection="code.block" />
-			<include collection="metadata.comment" />
-			<include collection="metadata.preprocess" />
-			<include collection="keyword" />
-			<include collection="delimiter" />
-			<include collection="literal.string" />
-			<include collection="literal.numeric" />
-			<include collection="literal.keyword" />
-			<include collection="literal.collection" />
-		</collection>
-		
-		<!-- Class attributes - variables and methods -->
-		<collection name="class.attributes">
-			<zone name="container.function.definition.instance">
+		<collection name="root.haxe">
+			<!-- Top-level constructs. The actual declaration blocks follow the specific declaration header zone -->
+			<!-- Package -->
+			<zone name="container.package.haxe">
+				<expression>\b(?&lt;!\.)(package)\s+([a-z_]\w*(?:\.[a-zA-Z_]\w*)*)(;)</expression>
+				<capture number="1" name="keyword.package.haxe"/>
+				<capture number="2" name="identifier.package.definition.haxe"/>
+				<capture number="3" name="keyword.delimiter.terminator.haxe"/>
+			</zone>
+			<!-- Import -->
+			<zone name="container.import.haxe">
 				<starts-with>
-					<expression>\b(function)\s+([a-zA-Z_]\w*)\s*(\()</expression>
-					<capture number="1" name="keyword.definition.function.instance" />
-					<capture number="2" name="identifier.variable.function.definition.instance" />
-					<capture number="3" name="delimiter.balanced.parenthesis.begin"/>
+					<expression>\b(?&lt;!\.)(import)\b(?!\.)</expression>
+					<capture number="1" name="keyword.import.haxe"/>
 				</starts-with>
 				<ends-with>
-					<expression>(\))</expression>
-					<capture number="1" name="delimiter.balanced.parenthesis.end"/>
+					<expression>;</expression>
+					<capture number="1" name="keyword.delimiter.terminator.haxe"/>
 				</ends-with>
 				<subzones>
-					<include collection="code.block.subzones" />
+					<include collection="type.haxe"/>
 				</subzones>
 			</zone>
-			<zone name="container.variable.definition.instance">
+			<!-- Class -->
+			<zone name="container.class.definition.haxe">
 				<starts-with>
-					<expression>\b(var)\s+([a-zA-Z_]\w*)</expression>
-					<capture number="1" name="keyword.definition.variable.instance" />
-					<capture number="2" name="identifier.variable.definition.instance" />
+					<expression>\b(?&lt;!\.)(class)\s+([A-Z_]\w*)</expression>
+					<capture number="1" name="keyword.definition.class.haxe"/>
+					<capture number="2" name="identifier.type.class.definition.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?=\{)</expression>
+				</ends-with>
+				<subzones>
+					<include collection="metadata.haxe" />
+					<include collection="type.extension.haxe"/>
+				</subzones>
+			</zone>
+			<!-- Interface -->
+			<zone name="container.class.interface.definition.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(interface)\s+([A-Z_]\w*)</expression>
+					<capture number="1" name="keyword.definition.interface.haxe"/>
+					<capture number="2" name="identifier.type.interface.definition.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?=\{)</expression>
+				</ends-with>
+				<subzones>
+					<include collection="metadata.haxe" />
+					<include collection="type.extension.haxe"/>
+				</subzones>
+			</zone>
+			<!-- Typedef -->
+			<zone name="container.typedef.definition.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(typedef)\s+([A-Z_]\w*)\s*(=)</expression>
+					<capture number="1" name="keyword.definition.typedef.haxe"/>
+					<capture number="2" name="identifier.type.typedef.definition.haxe"/>
+					<capture number="3" name="operator.accessor.equal.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>;</expression>
+					<capture number="0" name="delimiter.terminator.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="metadata.haxe" />
+					<include collection="type.haxe"/>
+				</subzones>
+			</zone>
+			<!-- Enum -->
+			<zone name="container.enum.definition.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(enum)\s+([A-Z_]\w*)\s*(\{)</expression>
+					<capture number="1" name="keyword.definition.enum.haxe"/>
+					<capture number="2" name="identifier.type.enum.definition.haxe"/>
+					<capture number="3" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\}</expression>
+					<capture number="0" name="delimiter.balanced.bracket.end.angle.haxe"/>
+				</ends-with>
+				<subzones>
+					<zone name="container.enum.definition.constructor.haxe">
+						<starts-with>
+							<expression>\b(?&lt;!\.)([A-Za-z_]\w*)\s*(\()</expression>
+							<capture number="1" name="identifier.variable.enum.construct.haxe"/>
+							<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+						</starts-with>
+						<ends-with>
+							<expression>\)</expression>
+							<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+						</ends-with>
+						<subzones>
+							<include collection="variable.declaration.haxe" />
+						</subzones>
+					</zone>
+					<zone name="container.enum.definition.constant.haxe">
+						<expression>\b(?&lt;!\.)[A-Za-z_]\w*\b(?!\.)</expression>
+						<capture number="0" name="identifier.variable.enum.constant.haxe" />
+					</zone>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<!-- declaration blocks -->
+			<include collection="declaration.block.haxe"/>
+			<include collection="metadata.haxe" />
+		</collection>
+		
+		<!-- Local variables or formal parameters  -->
+		<collection name="variable.declaration.haxe">
+			<zone name="container.variable.declaration.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)[A-Za-z_]\w*\b(?!\.)</expression>
+					<capture number="0" name="identifier.variable.declaration"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?=,)|(?=;)|(?=\))</expression>
+				</ends-with>
+				<subzones>
+					<include collection="type.assignment.haxe"/>
+					<include collection="value.assignment.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+		
+		<!-- Assigning a specific type to a construct -->
+		<collection name="type.assignment.haxe">
+			<!-- We are using two zones, depending on whether is is an anonymous type or not -->
+			
+			<zone name="container.type.declaration.anon.haxe">
+				<starts-with>
+					<expression>\:(?=\s*\{)</expression>
+					<capture number="0" name="delimiter.separator.type.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?&lt;\})</expression>
+				</ends-with>
+				<subzones>
+					<include collection="anon.type.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.type.declaration.haxe">
+				<starts-with>
+					<expression>(\:)(?:\s*)(?=\w)</expression>
+					<capture number="1" name="delimiter.separator.type.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?!\w|\[|\&lt;|\&gt;)</expression>
+				</ends-with>
+				<subzones>
+					<include collection="named.type.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+		
+		<!-- Assigning a value to a variable -->
+		<collection name="value.assignment.haxe">
+			<zone name="container.statement.assignment">
+				<starts-with>
+					<expression>\=</expression>
+					<capture number="0" name="operator.accessor.assign"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?=,)|(?=;)|(?=\))</expression>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+		
+		<!-- One can "extend" a type through 'implements', 'extends' or adding type parameters -->
+		<collection name="type.extension.haxe">
+			<zone name="container.class.extends">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(extends|implements)\b(?!\.)</expression>
+					<capture number="1" name="keyword.definition.extends"/>
+				</starts-with>
+				<ends-with>
+					<expression>(,)|(?=\{)</expression>
+					<capture number="1" name="delimiter.separator.comma"/>
+				</ends-with>
+			</zone>
+			<zone name="container.class.parameters">
+				<starts-with>
+					<expression>\&lt;</expression>
+					<capture number="0" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\&gt;</expression>
+					<capture number="0" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="type.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+		
+		<!-- A declaration block, which can belong to a class or be an anonymous specifier -->
+		<collection name="declaration.block.haxe">
+			<zone name="container.block.declaration">
+				<starts-with>
+					<expression>\{</expression>
+					<capture number="0" name="delimiter.balanced.bracket.begin.curly"/>
+				</starts-with>
+				<ends-with>
+					<expression>\}</expression>
+					<capture number="0" name="delimiter.balanced.bracket.end.curly"/>
+				</ends-with>
+			<subzones>
+					<include collection="metadata.haxe" />
+					<include collection="type.assignment.haxe" />
+					<include collection="type.attribute.haxe" />
+					<include collection="code.block.haxe" />
+			</subzones>
+			</zone>				
+		</collection>
+		
+		<!-- A type can be aggregated, a name or a block -->
+		<collection name="type.haxe">
+			<include collection="declaration.block.haxe"/>
+			<include collection="named.type.haxe"/>
+		</collection>
+		
+		<!-- Anonymous types -->
+		<collection name="anon.type.haxe">
+			<include collection="declaration.block.haxe" />
+		</collection>
+		
+		<!-- A named type, which might include packages or not -->
+		<collection name="named.type.haxe">
+			<include collection="type.sys.haxe"/>
+			<zone name="container.type.user.name">
+				<expression>((?:[a-z_]\w*\.)*)([a-zA-Z_]\w*)</expression>
+			</zone>
+			
+		</collection>
+
+		<!-- All the expressions, which includes statements, and type of expression fragments -->
+		<collection name="expression.haxe">
+			<include collection="metadata.haxe" />
+			<include collection="literal.haxe" />
+			<include collection="code.block.haxe" />
+			<include collection="control.statement.haxe"/>
+			<include collection="declaration.statement.haxe"/>
+			<include collection="type.assignment.haxe" />
+			<include collection="value.assignment.haxe" />
+			<include collection="predefined.haxe"/>
+			<zone name="container.expression.name">
+				<expression>\b[A-Za-z_]\w*\b</expression>
+				<capture number="0" name="name.variable"/>
+			</zone>
+			<zone name="container.expression.new">
+				<starts-with>
+					<expression>\b(?&lt;!\.)new\b(?&lt;!\.)</expression>
+					<capture number="0" name="keyword.oop.new"/>
+				</starts-with>
+				<ends-with>
+					<expression>(?&lt;=\))</expression>
+				</ends-with>
+				<subzones>
+					<include collection="type.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+				<!-- Yep, need to include the type definitions here... -->
+				<include collection="type.haxe" />
+			</zone>
+		</collection>
+		
+		<!-- Code block, whether inside a method or the methody body itself -->
+		
+		<collection name="code.block.haxe">
+			<zone name="container.expression.block">
+			<starts-with>
+				<expression>\{</expression>
+				<capture number="0" name="delimiter.balanced.bracket.begin.angle" />
+			</starts-with>
+			<ends-with>
+				<expression>\}</expression>
+				<capture number="0" name="delimiter.balanced.bracket.end.angle" />
+			</ends-with>
+			<subzones>
+				<include collection="expression.haxe" />
+				<include collection="metadata.haxe" />
+			</subzones>
+			</zone>
+		</collection>
+		
+		<!-- Type attribute - definition or declaration of variables or methods,
+		     to fit inside definition of  -->
+		<collection name="type.attribute.haxe">
+			<include collection="keyword.modifier" />
+			<zone name="container.function.definition.instance.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(function)\s+([a-zA-Z_]\w*)\s*(\()</expression>
+					<capture number="1" name="keyword.definition.function.instance.haxe"/>
+					<capture number="2" name="identifier.variable.function.definition.instance.haxe"/>
+					<capture number="3" name="delimiter.balanced.parenthesis.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(\))</expression>
-					<capture number="1" name="delimiter.balanced.parenthesis.end"/>
+					<capture number="1" name="delimiter.balanced.parenthesis.end.haxe"/>
 				</ends-with>
 				<subzones>
-					<include collection="code.block.subzones" />
+					<include collection="variable.declaration.haxe"/>
+					<include collection="metadata.haxe" />
 				</subzones>
+			</zone>
+			<zone name="container.variable.property.definition.instance.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(var)\s+([A-Za-z_]\w*)\s*(\()</expression>
+					<capture number="1" name="keyword.definition.variable.instance.haxe" />
+					<capture number="2" name="identifier.variable.declaration.haxe" />
+					<capture number="3" name="delimiter.balanced.parenthesis.begin.haxe" />
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe" />
+				</ends-with>
+				<subzones>
+					<zone name="container.declaration.accessor">
+						<expression>\b(?&lt;!\.)(?:(default)|(null)|(dynamic)|([A-Za-z_]\w*))\b(?!\.)</expression>
+						<capture number="1" name="keyword.accessor.default.haxe" />
+						<capture number="2" name="keyword.accessor.null.haxe" />
+						<capture number="3" name="keyword.accessor.dynamic.haxe" />
+						<capture number="4" name="identifier.declaration.function.accessor.haxe" />
+					</zone>
+					<include collection="metadata.haxe" />
+				</subzones>
+				<include collection="declaration.statement.haxe" />
 			</zone>
 		</collection>
 
-		<collection name="code.block">
-            <zone name="container.statement.control.flow.if">
-                <starts-with>
-                    <expression>\b(if)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.if" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-                    <include collection="block.subzones" />
-                </subzones>
-            </zone>
-            <zone name="container.statement.control.flow.elseif">
-                <starts-with>
-                    <expression>\b(else\s*if)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.elseif" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-                    <include collection="code.block.subzones" />
-                </subzones>
-            </zone>
-            <zone name="container.statement.control.flow.else">
-                <expression>\belse\b</expression>
-                <capture number="0" name="keyword.control.flow.else" />
-            </zone>
-            <zone name="container.statement.control.flow.for">
-                <starts-with>
-                    <expression>\b(for)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.for" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-										<zone name="keyword.control.flow.in">
-                        <expression>in</expression>
-                    </zone>
-                    <include collection="code.block.subzones" />
-                </subzones>
-            </zone>
-            <zone name="container.statement.control.flow.while">
-                <starts-with>
-                    <expression>\b(while)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.while" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-                    <include collection="code.block.subzones" />
-                </subzones>
-            </zone>
-            <zone name="container.statement.control.flow.dowhile">
-                    <expression>\bdo\b</expression>
-                    <capture number="0" name="keyword.control.flow.dowhile" />
-            </zone>
-            <zone name="container.statement.control.flow.switch">
-                <starts-with>
-                    <expression>\b(switch)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.flow.switch" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-                    <include collection="code.block.subzones" />
-                </subzones>
-            </zone>
-            <zone name="container.statement.control.exception.try">
-                <expression>\btry\b</expression>
-                <capture number="0" name="keyword.control.exception.try" />
-            </zone>
-            <zone name="container.statement.control.exception.finally">
-                <expression>\bfinally\b</expression>
-                <capture number="0" name="keyword.control.exception.finally" />
-            </zone>
-            <zone name="container.statement.control.exception.catch">
-                <starts-with>
-                    <expression>\b(catch)\s*(\()</expression>
-                    <capture number="1" name="keyword.control.exception.catch" />
-                    <capture number="2" name="delimiter.balanced.parenthesis.begin" />
-                </starts-with>
-                <ends-with>
-                    <expression>\)</expression>
-                    <capture number="0" name="delimiter.balanced.parenthesis.end" />
-                </ends-with>
-                <subzones>
-                    <include collection="code.block.subzones" />
-                </subzones>
-            </zone>
-        </collection>
-		
-		<collection name="code.block.subzones">
-				<include collection="metadata.comment" />
-	        <include collection="literal.collection" />
-	        <include collection="container.block" />
-	        <include collection="literal.keyword" />
-	        <include collection="delimiter" />
-	        <include collection="literal.string" />
-	        <include collection="literal.numeric" />
-	        <include collection="keyword" />
+		<!-- A variable declaration, whether inside a class scope or a local scope -->
+		<collection name="declaration.statement.haxe">
+			<zone name="container.variable.definition.instance.haxe">
+				<expression>\b(?&lt;!\.)(var)\s+([A-Za-z_]\w*)\b(?!\.)</expression>
+				<capture number="1" name="keyword.definition.variable.instance.haxe" />
+				<capture number="2" name="identifier.variable.declaration.haxe" />
+			</zone>		
 		</collection>
-		
+
+		<collection name="control.statement.haxe">
+			<zone name="container.statement.control.flow.if.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(if)\s*(\()</expression>
+					<capture number="1" name="keyword.control.flow.if.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.flow.elseif.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(else\s*if)\s*(\()</expression>
+					<capture number="1" name="keyword.control.flow.elseif.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.flow.else.haxe">
+				<expression>\b(?&lt;!\.)else\b(?&lt;!\.)</expression>
+				<capture number="0" name="keyword.control.flow.else.haxe"/>
+			</zone>
+			<zone name="container.statement.control.flow.for.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(for)\s*(\()</expression>
+					<capture number="1" name="keyword.control.flow.for.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<zone name="keyword.control.flow.in.haxe">
+						<expression>in</expression>
+					</zone>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.flow.while.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(while)\s*(\()</expression>
+					<capture number="1" name="keyword.control.flow.while.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.flow.dowhile.haxe">
+				<expression>\b(?&lt;!\.)do\b(?&lt;!\.)</expression>
+				<capture number="0" name="keyword.control.flow.dowhile.haxe"/>
+			</zone>
+			<zone name="container.statement.control.flow.switch.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(switch)\s*(\()</expression>
+					<capture number="1" name="keyword.control.flow.switch.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.exception.try.haxe">
+				<expression>\b(?&lt;!\.)try\b(?&lt;!\.)</expression>
+				<capture number="0" name="keyword.control.exception.try.haxe"/>
+			</zone>
+			<zone name="container.statement.control.exception.finally.haxe">
+				<expression>\b(?&lt;!\.)finally\b(?&lt;!\.)</expression>
+				<capture number="0" name="keyword.control.exception.finally.haxe"/>
+			</zone>
+			<zone name="container.statement.control.exception.catch.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)(catch)\s*(\()</expression>
+					<capture number="1" name="keyword.control.exception.catch.haxe"/>
+					<capture number="2" name="delimiter.balanced.parenthesis.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>\)</expression>
+					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="variable.declaration.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="container.statement.control.exception.throw.haxe">
+				<starts-with>
+					<expression>\b(?&lt;!\.)throw\b(?&lt;!\.)</expression>
+					<capture number="0" name="keyword.control.exception.throw.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>;</expression>
+					<capture number="0" name="delimiter.terminator.haxe.haxe"/>
+				</ends-with>
+				<subzones>
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+
+		<!-- All pre-defined names, operators, delimiters and standard types -->
+		<collection name="predefined.haxe">
+			<include collection="keyword.haxe"/>
+			<include collection="type.sys.haxe"/>
+			<include collection="package.sys.haxe"/>
+			<include collection="operator.haxe"/>
+			<include collection="delimiter.haxe"/>
+		</collection>
+
 		<!-- Delimiters -->
-        
-        <collection name="delimiter">
-            <zone name="delimiter.terminator">
-                <expression>;</expression>
-            </zone>
-            <zone name="delimiter.separator.comma">
-                <expression>,</expression>
-            </zone>
-            <zone name="delimiter.separator.pairing">
-                <expression>\:</expression>
-            </zone>
-						<zone name="delimiter.separator.dot">
-							<expression>\.</expression>
-						</zone>
-            <zone name="delimiter.balanced.begin.curly-brace">
-                <expression>\{</expression>
-            </zone>
-            <zone name="delimiter.balanced.end.curly-brace">
-                <expression>\}</expression>
-            </zone>
-            <zone name="delimiter.balanced.begin.parenthesis">
-                <expression>\(</expression>
-            </zone>
-            <zone name="delimiter.balanced.end.parenthesis">
-                <expression>\)</expression>
-            </zone>
-            <zone name="delimiter.balanced.begin.square-brace">
-                <expression>\[</expression>
-            </zone>
-            <zone name="delimiter.balanced.end.square-brace">
-                <expression>\]</expression>
-            </zone>
-        </collection>
-		
-		<collection name="comment">
-			<zone name="metadata.comment.documentation">
-				<starts-with>
-					<expression>/\*\*</expression>
-					<capture number="0" name="punctuation.definition.begin"/>
-				</starts-with>
-				<ends-with>
-					<expression>\*/</expression>
-					<capture number="0" name="punctuation.definition.end"/>
-				</ends-with>
+		<collection name="delimiter.haxe">
+			<zone name="delimiter.terminator.haxe">
+				<expression>;</expression>
 			</zone>
-			<zone name="metadata.comment.block">
-				<starts-with>
-					<expression>/\*</expression>
-					<capture number="0" name="punctuation.definition.begin"/>
-				</starts-with>
-				<ends-with>
-					<expression>\*/</expression>
-					<capture number="0" name="punctuation.definition.end"/>
-				</ends-with>
+			<zone name="delimiter.separator.comma.haxe">
+				<expression>,</expression>
 			</zone>
-			<zone name="metadata.comment.line">
-				<expression>(//).*$\n?</expression>
-				<capture number="1" name="punctuation.definition.begin"/>
+			<zone name="delimiter.separator.pairing.haxe">
+				<expression>\:</expression>
 			</zone>
+			<zone name="delimiter.separator.dot.haxe">
+				<expression>\.</expression>
+			</zone>
+			<zone name="delimiter.balanced.begin.curly-brace.haxe">
+				<expression>\{</expression>
+			</zone>
+			<zone name="delimiter.balanced.end.curly-brace.haxe">
+				<expression>\}</expression>
+			</zone>
+			<zone name="delimiter.balanced.begin.parenthesis.haxe">
+				<expression>\(</expression>
+			</zone>
+			<zone name="delimiter.balanced.end.parenthesis.haxe">
+				<expression>\)</expression>
+			</zone>
+			<zone name="delimiter.balanced.begin.square-brace.haxe">
+				<expression>\[</expression>
+			</zone>
+			<zone name="delimiter.balanced.end.square-brace.haxe">
+				<expression>\]</expression>
+			</zone>
+			
 		</collection>
 		
-		<!-- Keywords and standard classes... -->
-		
-		<collection name="keyword">
-			<zone name="keyword.definition">
-				<expression>\b(package|class|function|import|interface|extends|implements|var|typedef)</expression>
-			</zone>
-			<zone name="identifier.type.sys">
-				<expression>\b(Array(Access)?|Bool|Class|Date(Tools)?|Dynamic|EReg|Enum|Float|Hash|Int(Hash|Iter)?|Itera(ble|tor)|Lambda|List|Math|Null|Reflect|Std|String(Buf|Tools)?|Type|UInt|ValueType|Void|Xml(Type)?)\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.flash-pkg">
-				<expression>\b(Accessibility|Boot|Button|Camera|Color|ContextMenu(Item)?|ExtendedKey|Key|Lib|LoadVars|LocalConnection|Microphone|Mouse|MovieClip(Loader)?|Net(Connection|Stream)|PrintJob|Selection(Listener)?|SharedObject|Sound|Stage|System|Text(Field|Format|Snapshot)|Video|XML(Request|Socket))\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.flash9-pkg">
-				<expression>\b(Boot|Error|Lib|Memory|Vector)\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.haxe-pkg">
-				<expression>\b(BaseCode|Fast(Cell|List)|Firebug|Http|Int32|Log|Md5|PosInfos|Public|Resource|Serializer|Stack(Item)?|Template|Timer(Queue)?|TypeResolver|Unserializer)\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.js-pkg">
-				<expression>\b(Anchor|Body|Boot|Button|Checkbox|Document|Dom|Event|FileUpload|Form(Element)?|Frame(set)?|Hidden|History|Html(Collection|Dom)|IFrame|Image|Lib|Link|Location|MetaDom|Navigator|Option|Password|Radio|Reset|SWFObject|Screen|Select(ion)?|Style(Sheet)?|Submit|Text(area)?|Window|XML(HttpRequest|Socket))\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.neko-pkg">
-				<expression>\b(Boot|File(Kind|Stat|System)|Lib|Native(Array|String)|Random|Sys|Utf8|Web)\b</expression>
-			</zone>
-			<zone name="identifier.type.sys.php-pkg">
-				<expression>\b(Boot|CacheLimiter|Exception|File(Kind|Stat|System)|HException|Lib|Native(Array|String)|Session|Sys|Utf8|Web)\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.flash-pkg">
-				<expression>\b(flash(?:\.(?:accessibility|display|errors|events|external|filters|geom|media|net|printing|sampler|system|text|trace|ui|utils|xml))?)\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.haxe-pkg">
-				<expression>\b(haxe(?:\.(?:io|remoting|rtti|unit|xml))?)\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.js-pkg">
-				<expression>\bjs\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.neko-pkg">
-				<expression>\bneko(?:\.(?:db|io|net|vm|zip))?\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.php-pkg">
-				<expression>\bphp(?:\.(?:db|io|net))?\b</expression>
-			</zone>
-			<zone name="identifier.package.sys.tools-pkg">
-				<expression>\btools(?:\.(?:haxedoc|haxelib|hxinst))?\b</expression>
-			</zone>
-			<zone name="keyword.control.flow">
-                <expression>\b(break|case|continue|default|do|else|else\s*if|for|if|switch|while|return)\b</expression>
-            </zone>
-			<zone name="keyword.modifier.scope">
-				<expression>\b(public|private)\b</expression>
-			</zone>
-			<zone name="keyword.modifier.aux">
-				<expression>\b(static|dynamic|override|inline)\b</expression>
+		<collection name="operator.haxe">
+			<zone name="operator.haxe">
+				<expression>\&lt;|\&gt;|\&lt;\=|\&gt;\=|\=|\==|\+|\-|\+\=|\-\=|\+\+|\-\-|\*|\^</expression>
 			</zone>
 		</collection>
+
+		<!-- keywords -->
+		<collection name="keyword.haxe">
+			<zone name="keyword.definition.haxe">
+				<expression>\b(?&lt;!\.)(package|class|function|import|interface|extends|implements|var|typedef)</expression>
+			</zone>
+			<zone name="keyword.control.flow.haxe">
+				<expression>\b(?&lt;!\.)(break|case|continue|default|do|else|else\s*if|for|if|switch|while|return)\b(?&lt;!\.)</expression>
+			</zone>
+			<include collection="keyword.modifier" />
+		</collection>
 		
-		<collection name="literal.collection">
-			<zone name="literal.collection.array">
+		<collection name="keyword.modifier">
+			<zone name="keyword.modifier.scope.haxe">
+				<expression>\b(?&lt;!\.)(public|private)\b(?&lt;!\.)</expression>
+			</zone>
+			<zone name="keyword.modifier.aux.haxe">
+				<expression>\b(?&lt;!\.)(static|dynamic|override|inline)\b(?&lt;!\.)</expression>
+			</zone>
+			
+		</collection>
+
+		<!-- All literals -->
+		<collection name="literal.haxe">
+			<include collection="literal.string.haxe"/>
+			<include collection="literal.numeric.haxe"/>
+			<include collection="literal.collection.haxe"/>
+			<include collection="literal.keyword.haxe"/>
+		</collection>
+		<collection name="literal.collection.haxe">
+			<zone name="literal.collection.array.haxe">
 				<starts-with>
 					<expression>\[</expression>
 				</starts-with>
@@ -334,54 +570,58 @@
 					<expression>\]</expression>
 				</ends-with>
 				<subzones>
-					<include collection="core" />
+					<include collection="expression.haxe"/>
+					<include collection="metadata.haxe" />
 				</subzones>
 			</zone>
 		</collection>
-		
+
 		<!-- Literals Grabbed from PHP.sugar (via the AS3 sugar...) -->
-	    
-	    <collection name="literal.string">
-            <zone name="literal.string.single">
-                <starts-with>
-                    <expression>'</expression>
-                    <capture number="0" name="delimiter.balanced.quote.begin"/>
-                </starts-with>
-                <ends-with>
-                    <expression>'</expression>
-                    <capture number="0" name="delimiter.balanced.quote.end"/>
-                </ends-with>
-                <subzones>
-                    <zone name="literal.escape.brief">
-                        <!-- 'A single-quoted string with \'escape sequences\'' -->
-                        <expression>(\\)('|\\)</expression>
-                        <capture number="1" name="delimiter.seperator.escape"/>
-                        <capture number="2" name="literal.character"/>
-                    </zone>
-                </subzones>
-            </zone>
-            <zone name="literal.string.double">
-                <starts-with>
-                    <expression>"</expression>
-                    <capture number="0" name="delimiter.balanced.double-quote.begin"/>
-                </starts-with>
-                <ends-with>
-                    <expression>"</expression>
-                    <capture number="0" name="delimiter.balanced.double-quote.end"/>
-                </ends-with>
-                <subzones>
-                    <zone name="literal.escape.brief">
-                        <!-- 'A single-quoted string with \'escape sequences\'' -->
-                        <expression>(\\)("|\\)</expression>
-                        <capture number="1" name="delimiter.seperator.escape"/>
-                        <capture number="2" name="literal.character"/>
-                    </zone>
-                </subzones>
-            </zone>
-	    </collection>
-	    
-        <collection name="literal.numeric">
-            <!--
+		<collection name="literal.string.haxe">
+			<zone name="literal.string.quoted.single.haxe">
+				<starts-with>
+					<expression>'</expression>
+					<capture number="0" name="delimiter.balanced.quote.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>'</expression>
+					<capture number="0" name="delimiter.balanced.quote.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<zone name="literal.escape.brief.haxe">
+						<!-- 'A single-quoted string with \'escape sequences\'' -->
+						<expression>(\\)('|\\)</expression>
+						<capture number="1" name="delimiter.seperator.escape.haxe"/>
+						<capture number="2" name="literal.character.haxe"/>
+					</zone>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			<zone name="literal.string.quoted.double.haxe">
+				<starts-with>
+					<expression>"</expression>
+					<capture number="0" name="delimiter.balanced.double-quote.begin.haxe"/>
+				</starts-with>
+				<ends-with>
+					<expression>"</expression>
+					<capture number="0" name="delimiter.balanced.double-quote.end.haxe"/>
+				</ends-with>
+				<subzones>
+					<zone name="literal.escape.brief.haxe">
+						<!-- 'A single-quoted string with \'escape sequences\'' -->
+						<expression>(\\)("|\\)</expression>
+						<capture number="1" name="delimiter.seperator.escape.haxe"/>
+						<capture number="2" name="literal.character.haxe"/>
+					</zone>
+					<include collection="metadata.haxe" />
+				</subzones>
+			</zone>
+			
+		</collection>
+
+
+		<collection name="literal.numeric.haxe">
+			<!--
             I want to seperately hilight all the different types of
             literal.numerics. So, we have to provide multiple similar definitions
             of a literal.numeric.
@@ -389,126 +629,381 @@
 			Grabbed from PHP Sugar
             Grabbed from elliottcable's Ruby.sugar
             -->
-            <!-- 01756 -->
-            <zone name="literal.numeric.integer.octal">
-                <expression>\b(0)([0-7]+)\b</expression>
-            </zone>
-            <!-- 0b010010110 -->
-            <zone name="literal.numeric.integer.binary">
-                <expression>\b(0(?:b|B))([01]+)\b</expression>
-            </zone>
-            <!-- 0xDEADBEEF586 -->
-            <zone name="literal.numeric.integer.hex">
-                <expression>\b(0(?:x|X))([0-9a-fA-F]+)\b</expression>
-            </zone>
-            <!-- 142.87e3, 0.22e8 -->
-            <zone name="literal.numeric.float.with-exponent">
-                <expression>\b(0|[1-9][0-9]*)(\.)([0-9]+)(e|E)(-?[0-9]+)\b</expression>
-            </zone>
-            <!-- 142.87, 0.22 -->
-            <zone name="literal.numeric.float">
-                <expression>\b(0|[1-9][0-9]*)(\.)([0-9]+)\b</expression>
-            </zone>
-            <!-- 142e3, 0e8 -->
-            <zone name="literal.numeric.integer.decimal.with-exponent">
-                <expression>\b(0|[1-9][0-9]*)(e|E)(-?[0-9]+)\b</expression>
-            </zone>
-            <!-- 142e3, 0e8 -->
-            <zone name="literal.numeric.integer.decimal">
-                <expression>\b(0|[1-9][0-9]*)\b</expression>
-            </zone>
-        </collection>
-        
-        <collection name="literal.keyword">
-            <!-- true -->
-            <zone name="literal.keyword.bool.true">
-            	<expression>\btrue\b</expression>
-            </zone>
-            <!-- false -->
-            <zone name="literal.keyword.bool.false">
-            	<expression>\bfalse\b</expression>
-            </zone>
-            <!-- null -->
-            <zone name="literal.keyword.nothing">
-            	<expression>\bnull\b</expression>
-            </zone>
-        </collection>
-
-		<!-- Metadata grabbed from PHP.sugar, but modified to handle #ifdef's -->
-		<collection name="metadata.comment">
-			<!-- // comment -->
-			<zone name="metadata.comment.line.double-slash">
-				<expression>(//)(\s?(.*)?$\n?)</expression>
-				<capture number="1" name="delimiter.separator.double-slash.comment.begin" />
-				<capture number="3" name="content" />
+			<!-- 01756 -->
+			<zone name="literal.numeric.integer.octal.haxe">
+				<expression>\b(?&lt;!\.)(0)([0-7]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 0b010010110 -->
+			<zone name="literal.numeric.integer.binary.haxe">
+				<expression>\b(?&lt;!\.)(0(?:b|B))([01]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 0xDEADBEEF586 -->
+			<zone name="literal.numeric.integer.hex.haxe">
+				<expression>\b(?&lt;!\.)(0(?:x|X))([0-9a-fA-F]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 142.87e3, 0.22e8 -->
+			<zone name="literal.numeric.float.with-exponent.haxe">
+				<expression>\b(?&lt;!\.)(0|[1-9][0-9]*)(\.)([0-9]+)(e|E)(-?[0-9]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 142.87, 0.22 -->
+			<zone name="literal.numeric.float.haxe">
+				<expression>\b(?&lt;!\.)(0|[1-9][0-9]*)(\.)([0-9]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 142e3, 0e8 -->
+			<zone name="literal.numeric.integer.decimal.with-exponent.haxe">
+				<expression>\b(?&lt;!\.)(0|[1-9][0-9]*)(e|E)(-?[0-9]+)\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- 142e3, 0e8 -->
+			<zone name="literal.numeric.integer.decimal.haxe">
+				<expression>\b(?&lt;!\.)(0|[1-9][0-9]*)\b(?&lt;!\.)</expression>
 			</zone>
 			
-			<zone name="metadata.comment.documentation">
+		</collection>
+
+		<collection name="literal.keyword.haxe">
+			<!-- true -->
+			<zone name="literal.keyword.bool.true.haxe">
+				<expression>\b(?&lt;!\.)true\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- false -->
+			<zone name="literal.keyword.bool.false.haxe">
+				<expression>\b(?&lt;!\.)false\b(?&lt;!\.)</expression>
+			</zone>
+			<!-- null -->
+			<zone name="literal.keyword.nothing.haxe">
+				<expression>\b(?&lt;!\.)null\b(?&lt;!\.)</expression>
+			</zone>
+			
+		</collection>
+
+		<collection name="metadata.haxe">
+			<zone name="metadata.comment.line.double-slash.haxe">
+				<expression>(//)(\s?(.*)?$\n?)</expression>
+				<capture number="1" name="delimiter.separator.double-slash.comment.begin.haxe"/>
+				<capture number="3" name="content.haxe"/>
+			</zone>
+			<zone name="metadata.comment.documentation.haxe">
 				<starts-with>
 					<expression>(/\*\*)(\**)</expression>
-					<capture number="1" name="delimiter.separator.slash.double-asterisk.comment.begin"/>
+					<capture number="1" name="delimiter.separator.slash.double-asterisk.comment.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(\**)(\*/)</expression>
-					<capture number="2" name="delimiter.separator.slash.single-asterisk.comment.end"/>
+					<capture number="2" name="delimiter.separator.slash.single-asterisk.comment.end.haxe"/>
 				</ends-with>
 				<subzones>
-					<zone name="metadata.comment.documentation.line">
+					<zone name="metadata.comment.documentation.line.haxe">
 						<starts-with>
 							<expression>(\*)</expression>
-							<capture number="1" name="delimiter.separator.asterisk" />
+							<capture number="1" name="delimiter.separator.asterisk.haxe"/>
 						</starts-with>
 						<ends-with>
 							<expression>$\n?</expression>
 						</ends-with>
 						<subzones>
-							<zone name="metadata.comment.documentation.content">
+							<zone name="metadata.comment.documentation.content.haxe">
 								<expression>(.*)?</expression>
-								<capture number="3" name="content" />
+								<capture number="3" name="content.haxe"/>
 							</zone>
 						</subzones>
 					</zone>
 				</subzones>
-			</zone>			
-
-			<zone name="metadata.comment.block">
+			</zone>
+			<zone name="metadata.comment.block.haxe">
 				<starts-with>
 					<expression>(/\*)</expression>
-					<capture number="1" name="delimiter.separator.slash.single-asterisk.comment.begin"/>
+					<capture number="1" name="delimiter.separator.slash.single-asterisk.comment.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(\*/)</expression>
-					<capture number="1" name="delimiter.separator.slash.single-asterisk.comment.end"/>
+					<capture number="1" name="delimiter.separator.slash.single-asterisk.comment.end.haxe"/>
 				</ends-with>
+			</zone>
+			<zone name="metadata.processing.if.haxe">
+				<expression>^\s*#(if|elseif|else)\b.*$</expression>
+				<capture number="0" name="metadata.processing.line.haxe"/>
+				<capture number="1" name="keyword.processing.if.haxe"/>
+				<capture number="2" name="metadata.processing.cond.haxe"/>
+				<capture number="3" name="keyword.processing.else.haxe"/>
+			</zone>
+			<zone name="metadata.processing.end.haxe">
+				<expression>^\s*#(end)\b.*$</expression>
+				<capture number="0" name="metadata.processing.line.haxe"/>
+				<capture number="1" name="keyword.processing.end.haxe"/>
 			</zone>
 		</collection>
-			
-		<collection name="metadata.preprocess">	
-			<zone name="metadata.preprocess.if">
-				<starts-with>
-					<expression>(?&lt;=#)(?:((?:else)?if)\s+([^\s]+))|(else)\b</expression>
-					<capture number="0" name="metadata.preprocess.line" />
-					<capture number="1" name="keyword.preprocess.if" />
-					<capture number="2" name="metadata.preprocess.cond" />
-					<capture number="3" name="keyword.preprocess.else" />
-				</starts-with>
-				<ends-with>
-					<expression>^\s*#</expression>
-					<capture number="1" name="keyword.preprocess.else" />
-					<capture number="2" name="keyword.preprocess.end" />
-				</ends-with>
-				<subzones>
-					<include syntax="self" />
-				</subzones>
+
+		<!-- All the standard classes; should be in a separate file? -->
+		<collection name="type.sys.haxe">
+			<zone name="container.type.name.sys.top.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)Array|ArrayAccess|Bool|Class|Date|DateTools|Dynamic|EReg|Enum|Float|Hash|Int|IntHash|IntIter|Iterable|Iterator|Lambda|List|Math|Null|Reflect|Std|String|StringBuf|StringTools|Type|UInt|ValueType|Void|Xml|XmlType</expression>
+				<capture number="0" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.* -->
+			<zone name="container.type.name.sys.flash.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.)?(Accessibility|Boot|Button|Camera|Color|ContextMenu|ContextMenuItem|ExtendedKey|Key|Lib|LoadVars|LocalConnection|Microphone|Mouse|MovieClip|MovieClipLoader|NetConnection|NetStream|PrintJob|Selection|SelectionListener|SharedObject|Sound|Stage|System|TextField|TextFormat|TextSnapshot|Video|XMLRequest|XMLSocket)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.display.* -->
+			<zone name="container.type.name.sys.flash.display.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.display\.)?(BitmapData)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.external.* -->
+			<zone name="container.type.name.sys.flash.external.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.external\.)?(ExternalInterface)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.filters.* -->
+			<zone name="container.type.name.sys.flash.filters.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.filters\.)?(BevelFilter|BitmapFilter|BlurFilter|ColorMatrixFilter|ConvolutionFilter|DisplacementMapFilter|DropShadowFilter|GlowFilter|GradientBevelFilter|GradientGlowFilter)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.geom.* -->
+			<zone name="container.type.name.sys.flash.geom.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.geom\.)?(ColorTransform|Matrix|Point|Rectangle)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.net.* -->
+			<zone name="container.type.name.sys.flash.net.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.net\.)?(FileReference|FileReferenceList)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.system.* -->
+			<zone name="container.type.name.sys.flash.system.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.system\.)?(Capabilities|IME|Security)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash.text.* -->
+			<zone name="container.type.name.sys.flash.text.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.text\.)?(StyleSheet|TextRenderer)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.* -->
+			<zone name="container.type.name.sys.flash9.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.)?(Boot|Error|Lib|Memory|Vector)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.accessibility.* -->
+			<zone name="container.type.name.sys.flash9.accessibility.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.accessibility\.)?(Accessibility|AccessibilityImplementation|AccessibilityProperties)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.display.* -->
+			<zone name="container.type.name.sys.flash9.display.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.display\.)?(AVM1Movie|ActionScriptVersion|Bitmap|BitmapData|BitmapDataChannel|BlendMode|CapsStyle|DisplayObject|DisplayObjectContainer|FrameLabel|GradientType|Graphics|GraphicsBitmapFill|GraphicsEndFill|GraphicsGradientFill|GraphicsPath|GraphicsPathCommand|GraphicsPathWinding|GraphicsShaderFill|GraphicsSolidFill|GraphicsStroke|GraphicsTrianglePath|IBitmapDrawable|IGraphicsData|IGraphicsFill|IGraphicsPath|IGraphicsStroke|InteractiveObject|InterpolationMethod|JointStyle|LineScaleMode|Loader|LoaderInfo|MorphShape|MovieClip|PixelSnapping|SWFVersion|Scene|Shader|ShaderData|ShaderInput|ShaderJob|ShaderParameter|ShaderParameterType|ShaderPrecision|Shape|SimpleButton|SpreadMethod|Sprite|Stage|StageAlign|StageDisplayState|StageQuality|StageScaleMode|TriangleCulling)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.errors.* -->
+			<zone name="container.type.name.sys.flash9.errors.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.errors\.)?(EOFError|IOError|IllegalOperationError|InvalidSWFError|MemoryError|ScriptTimeoutError|StackOverflowError)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.events.* -->
+			<zone name="container.type.name.sys.flash9.events.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.events\.)?(ActivityEvent|AsyncErrorEvent|ContextMenuEvent|DataEvent|ErrorEvent|Event|EventDispatcher|EventPhase|FocusEvent|FullScreenEvent|HTTPStatusEvent|IEventDispatcher|IMEEvent|IOErrorEvent|KeyboardEvent|MouseEvent|NetFilterEvent|NetStatusEvent|ProgressEvent|SampleDataEvent|SecurityErrorEvent|ShaderEvent|StatusEvent|SyncEvent|TextEvent|TimerEvent|WeakFunctionClosure|WeakMethodClosure)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.external.* -->
+			<zone name="container.type.name.sys.flash9.external.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.external\.)?(ExternalInterface)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.filters.* -->
+			<zone name="container.type.name.sys.flash9.filtersl.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.filters\.)?(BevelFilter|BitmapFilter|BitmapFilterQuality|BitmapFilterType|BlurFilter|ColorMatrixFilter|ConvolutionFilter|DisplacementMapFilter|DisplacementMapFilterMode|DropShadowFilter|GlowFilter|GradientBevelFilter|GradientGlowFilter|ShaderFilter)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.geom.* -->
+			<zone name="container.type.name.sys.flash9.geom.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.geom\.)?(ColorTransform|Matrix|Matrix3D|Orientation3D|PerspectiveProjection|Point|Rectangle|Transform|Utils3D|Vector3D)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.media.* -->
+			<zone name="container.type.name.sys.flash9.media.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.media\.)?(Camera|ID3Info|Microphone|Sound|SoundChannel|SoundCodec|SoundLoaderContext|SoundMixer|SoundTransform|Video)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.net.* -->
+			<zone name="container.type.name.sys.flash9.net.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.net\.)?(DynamicPropertyOutput|FileFilter|FileReference|FileReferenceList|IDynamicPropertyOutput|IDynamicPropertyWriter|LocalConnection|NetConnection|NetStream|NetStreamInfo|NetStreamPlayOptions|NetStreamPlayTransitions|ObjectEncoding|Responder|SharedObject|SharedObjectFlushStatus|Socket|URLLoader|URLLoaderDataFormat|URLRequest|URLRequestHeader|URLRequestMethod|URLStream|URLVariables|XMLSocket)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.printing.* -->
+			<zone name="container.type.name.sys.flash9.printing.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.printing\.)?(PrintJob|PrintJobOptions|PrintJobOrientation)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.sampler.* -->
+			<zone name="container.type.name.sys.flash9.sampler.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.sampler\.)?(Api|DeleteObjectSample|NewObjectSample|Sample|StackFrame)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.system.* -->
+			<zone name="container.type.name.sys.flash9.system.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.system\.)?(ApplicationDomain|Capabilities|FSCommand|IME|IMEConversionMode|JPEGLoaderContext|LoaderContext|Security|SecurityDomain|SecurityPanel|System)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.text.* -->
+			<zone name="container.type.name.sys.flash9.text.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.text\.)?(AntiAliasType|CSMSettings|Font|FontStyle|FontType|GridFitType|StaticText|StyleSheet|TextColorType|TextDisplayMode|TextExtent|TextField|TextFieldAutoSize|TextFieldType|TextFormat|TextFormatAlign|TextFormatDisplay|TextLineMetrics|TextRenderer|TextRun|TextSnapshot)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.text.engine.* -->
+			<zone name="container.type.name.sys.flash9.text.engine.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.text\.engine\.)?(BreakOpportunity|CFFHinting|ContentElement|DigitCase|DigitWidth|EastAsianJustifier|ElementFormat|FontDescription|FontLookup|FontMetrics|FontPosture|FontWeight|GraphicElement|GroupElement|JustificationStyle|Kerning|LigatureLevel|LineJustification|RenderingMode|SpaceJustifier|TabAlignment|TabStop|TextBaseline|TextBlock|TextElement|TextJustifier|TextLine|TextLineCreationResult|TextLineMirrorRegion|TextLineValidity|TextRotation|TypographicCase)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.trace.* -->
+			<zone name="container.type.name.sys.flash9.trace.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.trace\.)?(Trace)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.ui.* -->
+			<zone name="container.type.name.sys.flash9.ui.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.ui\.)?(ContextMenu|ContextMenuBuiltInItems|ContextMenuClipboardItems|ContextMenuItem|KeyLocation|Keyboard|Mouse|MouseCursor)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.utils.* -->
+			<zone name="container.type.name.sys.flash9.utils.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.utils\.)?(ByteArray|Dictionary|Endian|IDataInput|IDataOutput|IExternalizable|Namespace|ObjectInput|ObjectOutput|Proxy|QName|SetIntervalTimer|Timer|TypedDictionary)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- flash9.xml.* -->
+			<zone name="container.type.name.sys.flash9.xml.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(flash\.xml\.)?(XML|XMLDocument|XMLList|XMLNode|XMLNodeType|XMLParser|XMLTag)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.* -->
+			<zone name="container.type.name.sys.haxe.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.)?(BaseCode|FastCell|FastList|Firebug|Http|Int32|Log|Md5|PosInfos|Public|Resource|Serializer|Stack|StackItem|Template|Timer|TimerQueue|TypeResolver|Unserializer)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.io.* -->
+			<zone name="container.type.name.sys.haxe.io.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.io\.)?(Bytes|BytesBuffer|BytesData|BytesInput|BytesOutput|Eof|Error|Input|Output|StringInput)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.remoting.* -->
+			<zone name="container.type.name.sys.haxe.remoting.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.remoting\.)?(AMFConnection|AsyncAdapter|AsyncConnection|AsyncDebugConnection|AsyncProxy|Connection|Context|ContextAll|DelayedConnection|ExternalConnection|FlashJsConnection|HttpAsyncConnection|HttpConnection|LocalConnection|Proxy|Socket|SocketConnection|SocketProtocol|SocketWrapper|SyncSocketConnection)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.rtti.* -->
+			<zone name="container.type.name.sys.haxe.rtti.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.rtti\.)?(CType|ClassField|Classdef|EnumField|Enumdef|Generic|HtmlEditor|Infos|Path|PathParams|Platforms|Rights|TypeApi|TypeInfos|TypeParams|TypeRoot|TypeTree|Typedef|XmlParser)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.unit.* -->
+			<zone name="container.type.name.sys.haxe.unit.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.unit\.)?(TestCase|TestResult|TestRunner|TestStatus)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- haxe.xml.* -->
+			<zone name="container.type.name.sys.haxe.xml.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(haxe\.xml\.)?(Attrib|Check|Fast|Filter|Proxy|Rule)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- js.* -->
+			<zone name="container.type.name.sys.js.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(js\.)?(Anchor|Body|Boot|Button|Checkbox|Document|Dom|Event|FileUpload|Form|FormElement|Frame|Frameset|Hidden|History|HtmlCollection|HtmlDom|IFrame|Image|Lib|Link|Location|MetaDom|Navigator|Option|Password|Radio|Reset|SWFObject|Screen|Select|Selection|Style|StyleSheet|Submit|Text|Textarea|Window|XMLHttpRequest|XMLSocket)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.* -->
+			<zone name="container.type.name.sys.neko.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.)?(Boot|FileKind|FileStat|FileSystem|Lib|NativeArray|NativeString|Random|Sys|Utf8|Web)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.db.* -->
+			<zone name="container.type.name.sys.neko.db.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.db\.)?(Connection|Manager|Mysql|Object|ResultSet|Sqlite|Transaction)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.io.* -->
+			<zone name="container.type.name.sys.neko.io.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.io\.)?(File|FileHandle|FileInput|FileOutput|FileSeek|Path|Process)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.net.* -->
+			<zone name="container.type.name.sys.neko.net.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.net\.)?(Host|Poll|ProxyDetect|ProxySettings|ServerLoop|Socket|SocketHandle|SocketInput|SocketOutput|ThreadRemotingServer|ThreadServer)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.vm.* -->
+			<zone name="container.type.name.sys.neko.vm.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.vm\.)?(Deque|Gc|Loader|LoaderHandle|Lock|Module|ModuleHandle|Mutex|Thread|ThreadHandle|Tls|Ui)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- neko.zip.* -->
+			<zone name="container.type.name.sys.neko.zip.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(neko\.zip\.)?(CRC32|Compress|Flush|Reader|Uncompress|Writer|ZipEntry)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- php.* -->
+			<zone name="container.type.name.sys.php.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(php\.)?(Boot|CacheLimiter|Exception|FileKind|FileStat|FileSystem|HException|Lib|NativeArray|NativeString|Session|Sys|Utf8|Web)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- php.db.* -->
+			<zone name="container.type.name.sys.php.db.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(php\.db\.)?(Connection|Manager|Mysql|Object|ResultSet|Sqlite)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- php.io.* -->
+			<zone name="container.type.name.sys.php.io.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(php\.io\.)?(File|FileHandle|FileInput|FileOutput|FileSeek|Path|Process)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
+			</zone>
+			<!-- php.net.* -->
+			<zone name="container.type.name.sys.php.net.haxe">
+				<expression>(?&lt;!\.)\b(?&lt;!\.)(php\.net\.)?(Host|Socket|SocketDomain|SocketHandle|SocketInput|SocketOutput)\b</expression>
+				<capture number="1" name="identifier.package.sys.haxe"/>
+				<capture number="2" name="identifier.type.sys.haxe"/>
 			</zone>
 			
-			<zone name="metadata.preprocess.end">
-				<expression>(?&lt;=#)(end)\b</expression>
-				<capture number="0" name="metadata.preprocess.line" />
-				<capture number="1" name="keyword.preprocess.end" />
-			</zone>
-			
-	    </collection>
-		
+		</collection>
 	</library>
 </syntax>

@@ -6,8 +6,8 @@ CodeSense Providers map contexts in a document to possible completions. The actu
 -->
 <codesense>
 	<provider>
-		<selector>*</selector>
-		<completions>davber.haxe.class.toplevel</completions>
+		<selector>haxe</selector>
+		<completions>davber.haxe.class.classes</completions>
 		<complete-match>[a-zA-Z0-9]+</complete-match>
 	</provider>
 </codesense>
