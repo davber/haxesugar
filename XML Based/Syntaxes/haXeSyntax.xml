@@ -81,11 +81,11 @@
 					<expression>\b(?&lt;!\.)(enum)\s+([A-Z_]\w*)\s*(\{)</expression>
 					<capture number="1" name="keyword.definition.enum.haxe"/>
 					<capture number="2" name="identifier.type.enum.definition.haxe"/>
-					<capture number="3" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+					<capture number="3" name="delimiter.balanced.curly-brace.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>\}</expression>
-					<capture number="0" name="delimiter.balanced.bracket.end.angle.haxe"/>
+					<capture number="0" name="delimiter.balanced.curly-brace.end.haxe"/>
 				</ends-with>
 				<subzones>
 					<zone name="container.enum.definition.constructor.haxe">
@@ -119,7 +119,7 @@
 			<zone name="container.variable.declaration.haxe">
 				<starts-with>
 					<expression>\b(?&lt;!\.)[A-Za-z_]\w*\b(?!\.)</expression>
-					<capture number="0" name="identifier.variable.declaration"/>
+					<capture number="0" name="identifier.variable.declaration.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(?=,)|(?=;)|(?=\))</expression>
@@ -168,10 +168,10 @@
 		
 		<!-- Assigning a value to a variable -->
 		<collection name="value.assignment.haxe">
-			<zone name="container.statement.assignment">
+			<zone name="container.statement.assignment.haxe">
 				<starts-with>
 					<expression>\=</expression>
-					<capture number="0" name="operator.accessor.assign"/>
+					<capture number="0" name="operator.accessor.assign.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(?=,)|(?=;)|(?=\))</expression>
@@ -186,24 +186,24 @@
 		
 		<!-- One can "extend" a type through 'implements', 'extends' or adding type parameters -->
 		<collection name="type.extension.haxe">
-			<zone name="container.class.extends">
+			<zone name="container.class.extends.haxe">
 				<starts-with>
 					<expression>\b(?&lt;!\.)(extends|implements)\b(?!\.)</expression>
-					<capture number="1" name="keyword.definition.extends"/>
+					<capture number="1" name="keyword.definition.extends.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(,)|(?=\{)</expression>
-					<capture number="1" name="delimiter.separator.comma"/>
+					<capture number="1" name="delimiter.separator.comma.haxe"/>
 				</ends-with>
 			</zone>
-			<zone name="container.class.parameters">
+			<zone name="container.class.parameters.haxe">
 				<starts-with>
 					<expression>\&lt;</expression>
-					<capture number="0" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+					<capture number="0" name="delimiter.balanced.curly-brace.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>\&gt;</expression>
-					<capture number="0" name="delimiter.balanced.bracket.begin.angle.haxe"/>
+					<capture number="0" name="delimiter.balanced.curly-brace.begin.haxe"/>
 				</ends-with>
 				<subzones>
 					<include collection="type.haxe"/>
@@ -215,14 +215,14 @@
 		
 		<!-- A declaration block, which can belong to a class or be an anonymous specifier -->
 		<collection name="declaration.block.haxe">
-			<zone name="container.block.declaration">
+			<zone name="container.block.declaration.haxe">
 				<starts-with>
 					<expression>\{</expression>
-					<capture number="0" name="delimiter.balanced.bracket.begin.curly"/>
+					<capture number="0" name="delimiter.balanced.curly-brace.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>\}</expression>
-					<capture number="0" name="delimiter.balanced.bracket.end.curly"/>
+					<capture number="0" name="delimiter.balanced.curly-brace.end.haxe"/>
 				</ends-with>
 			<subzones>
 					<include collection="metadata.haxe" />
@@ -247,7 +247,7 @@
 		<!-- A named type, which might include packages or not -->
 		<collection name="named.type.haxe">
 			<include collection="type.sys.haxe"/>
-			<zone name="container.type.user.name">
+			<zone name="container.type.user.name.haxe">
 				<expression>((?:[a-z_]\w*\.)*)([a-zA-Z_]\w*)</expression>
 			</zone>
 			
@@ -263,14 +263,14 @@
 			<include collection="type.assignment.haxe" />
 			<include collection="value.assignment.haxe" />
 			<include collection="predefined.haxe"/>
-			<zone name="container.expression.name">
+			<zone name="container.expression.name.haxe">
 				<expression>\b[A-Za-z_]\w*\b</expression>
-				<capture number="0" name="name.variable"/>
+				<capture number="0" name="name.variable.haxe"/>
 			</zone>
-			<zone name="container.expression.new">
+			<zone name="container.expression.new.haxe">
 				<starts-with>
 					<expression>\b(?&lt;!\.)new\b(?&lt;!\.)</expression>
-					<capture number="0" name="keyword.oop.new"/>
+					<capture number="0" name="keyword.oop.new.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(?&lt;=\))</expression>
@@ -287,14 +287,14 @@
 		<!-- Code block, whether inside a method or the methody body itself -->
 		
 		<collection name="code.block.haxe">
-			<zone name="container.expression.block">
+			<zone name="container.expression.block.haxe">
 			<starts-with>
 				<expression>\{</expression>
-				<capture number="0" name="delimiter.balanced.bracket.begin.angle" />
+				<capture number="0" name="delimiter.balanced.curly-brace.begin.haxe" />
 			</starts-with>
 			<ends-with>
 				<expression>\}</expression>
-				<capture number="0" name="delimiter.balanced.bracket.end.angle" />
+				<capture number="0" name="delimiter.balanced.curly-brace.end.haxe" />
 			</ends-with>
 			<subzones>
 				<include collection="expression.haxe" />
@@ -306,13 +306,13 @@
 		<!-- Type attribute - definition or declaration of variables or methods,
 		     to fit inside definition of  -->
 		<collection name="type.attribute.haxe">
-			<include collection="keyword.modifier" />
 			<zone name="container.function.definition.instance.haxe">
 				<starts-with>
-					<expression>\b(?&lt;!\.)(function)\s+([a-zA-Z_]\w*)\s*(\()</expression>
-					<capture number="1" name="keyword.definition.function.instance.haxe"/>
-					<capture number="2" name="identifier.variable.function.definition.instance.haxe"/>
-					<capture number="3" name="delimiter.balanced.parenthesis.begin.haxe"/>
+					<expression>\b(?&lt;!\.)((?:(?:public|private|static|inline)\s+)*)(function)\s+([a-zA-Z_]\w*)\s*(\()</expression>
+					<capture number="1" name="keyword.definition.modifier.haxe" />
+					<capture number="2" name="keyword.definition.function.instance.haxe"/>
+					<capture number="3" name="identifier.variable.function.definition.instance.haxe"/>
+					<capture number="4" name="delimiter.balanced.parenthesis.begin.haxe"/>
 				</starts-with>
 				<ends-with>
 					<expression>(\))</expression>
@@ -325,17 +325,18 @@
 			</zone>
 			<zone name="container.variable.property.definition.instance.haxe">
 				<starts-with>
-					<expression>\b(?&lt;!\.)(var)\s+([A-Za-z_]\w*)\s*(\()</expression>
-					<capture number="1" name="keyword.definition.variable.instance.haxe" />
-					<capture number="2" name="identifier.variable.declaration.haxe" />
-					<capture number="3" name="delimiter.balanced.parenthesis.begin.haxe" />
+					<expression>\b(?&lt;!\.)((?:(?:public|private|static|inline)\s+)*)(var)\s+([A-Za-z_]\w*)\s*(\()</expression>
+					<capture number="1" name="keyword.definition.modifier.haxe" />
+					<capture number="2" name="keyword.definition.variable.instance.haxe" />
+					<capture number="3" name="identifier.variable.declaration.haxe" />
+					<capture number="4" name="delimiter.balanced.parenthesis.begin.haxe" />
 				</starts-with>
 				<ends-with>
 					<expression>\)</expression>
 					<capture number="0" name="delimiter.balanced.parenthesis.end.haxe" />
 				</ends-with>
 				<subzones>
-					<zone name="container.declaration.accessor">
+					<zone name="container.declaration.accessor.haxe">
 						<expression>\b(?&lt;!\.)(?:(default)|(null)|(dynamic)|([A-Za-z_]\w*))\b(?!\.)</expression>
 						<capture number="1" name="keyword.accessor.default.haxe" />
 						<capture number="2" name="keyword.accessor.null.haxe" />
@@ -351,9 +352,10 @@
 		<!-- A variable declaration, whether inside a class scope or a local scope -->
 		<collection name="declaration.statement.haxe">
 			<zone name="container.variable.definition.instance.haxe">
-				<expression>\b(?&lt;!\.)(var)\s+([A-Za-z_]\w*)\b(?!\.)</expression>
-				<capture number="1" name="keyword.definition.variable.instance.haxe" />
-				<capture number="2" name="identifier.variable.declaration.haxe" />
+				<expression>\b(?&lt;!\.)((?:(?:public|private|static|inline)\s+)*)(var)\s+([A-Za-z_]\w*)\b(?!\.)</expression>
+				<capture number="1" name="keyword.definition.modifier.haxe" />
+				<capture number="2" name="keyword.definition.variable.instance.haxe" />
+				<capture number="3" name="identifier.variable.declaration.haxe" />
 			</zone>		
 		</collection>
 
@@ -506,10 +508,10 @@
 			<zone name="delimiter.separator.dot.haxe">
 				<expression>\.</expression>
 			</zone>
-			<zone name="delimiter.balanced.begin.curly-brace.haxe">
+			<zone name="delimiter.balanced.curly-brace.begin.haxe">
 				<expression>\{</expression>
 			</zone>
-			<zone name="delimiter.balanced.end.curly-brace.haxe">
+			<zone name="delimiter.balanced.curly-brace.end.haxe">
 				<expression>\}</expression>
 			</zone>
 			<zone name="delimiter.balanced.begin.parenthesis.haxe">
@@ -544,7 +546,7 @@
 			<include collection="keyword.modifier" />
 		</collection>
 		
-		<collection name="keyword.modifier">
+		<collection name="keyword.modifier.haxe">
 			<zone name="keyword.modifier.scope.haxe">
 				<expression>\b(?&lt;!\.)(public|private)\b(?&lt;!\.)</expression>
 			</zone>
@@ -677,20 +679,23 @@
 		</collection>
 
 		<collection name="metadata.haxe">
-			<zone name="metadata.comment.line.double-slash.haxe">
+			<zone name="metadata.comment.single-line.double-slash.haxe">
 				<expression>(//)(\s?(.*)?$\n?)</expression>
-				<capture number="1" name="delimiter.separator.double-slash.comment.begin.haxe"/>
-				<capture number="3" name="content.haxe"/>
+				<capture number="1" name="delimiter.separator.double-slash.comment.punctuation.begin.haxe" />
+				<capture number="3" name="content.haxe" />
 			</zone>
-			<zone name="metadata.comment.documentation.haxe">
+			<zone name="metadata.comment.block.hxDoc.haxe">
 				<starts-with>
-					<expression>(/\*\*)(\**)</expression>
-					<capture number="1" name="delimiter.separator.slash.double-asterisk.comment.begin.haxe"/>
+					<expression>(/\*\*)</expression>
+					<capture number="1" name="delimiter.separator.slash.double-asterisk.comment.begin.haxe" />
 				</starts-with>
 				<ends-with>
-					<expression>(\**)(\*/)</expression>
-					<capture number="2" name="delimiter.separator.slash.single-asterisk.comment.end.haxe"/>
+					<expression>(\*/)</expression>
+					<capture number="1" name="delimiter.separator.single-asterisk.slash.comment.end.haxe" />
 				</ends-with>
+				
+				<!--
+				
 				<subzones>
 					<zone name="metadata.comment.documentation.line.haxe">
 						<starts-with>
@@ -708,6 +713,8 @@
 						</subzones>
 					</zone>
 				</subzones>
+				
+				-->
 			</zone>
 			<zone name="metadata.comment.block.haxe">
 				<starts-with>

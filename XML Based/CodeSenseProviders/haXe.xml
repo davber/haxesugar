@@ -6,7 +6,7 @@ CodeSense Providers map contexts in a document to possible completions. The actu
 -->
 <codesense>
 	<provider>
-		<selector>haxe</selector>
+		<selector>expression.haxe, type.haxe</selector>
 		<completions>davber.haxe.class.classes</completions>
 		<complete-match>[a-zA-Z0-9]+</complete-match>
 	</provider>
