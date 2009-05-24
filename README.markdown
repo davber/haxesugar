@@ -1,5 +1,5 @@
-# haXe Sugar v0.3.0
-> Updated 5/22/2009
+# haXe Sugar v0.3.2
+> Updated 5/23/2009
 
 ## Description
 

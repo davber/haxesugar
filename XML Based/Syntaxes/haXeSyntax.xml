@@ -345,8 +345,8 @@
 					</zone>
 					<include collection="metadata.haxe" />
 				</subzones>
-				<include collection="declaration.statement.haxe" />
 			</zone>
+				<include collection="declaration.statement.haxe" />
 		</collection>
 
 		<!-- A variable declaration, whether inside a class scope or a local scope -->
